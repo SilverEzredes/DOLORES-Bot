@@ -1,4 +1,5 @@
 from discord.ext import commands, tasks
+import functools
 import datetime
 import discord
 import aiohttp
@@ -9,6 +10,9 @@ import json
 import time
 import os
 
+# Flush on every print so logs work properly
+print = functools.partial(print, flush=True)
+
 # Asyncio drop-in replacement, 2-4x faster
 uvloop.install()
 
@@ -18,6 +22,10 @@ from modules import globals, db, utils, xp
 # Setup globals
 globals.loop = asyncio.get_event_loop()
 globals.cur_presence = 0
+if os.path.exists("config.json"):
+    with open("config.json", "rb") as f:
+        config = json.load(f)
+        os.environ.update(config)
 
 globals.ADMIN_ID                 = int       (os.environ.get("ADMIN_ID")                 or 0)
 globals.ASSISTANCE_CATEGORY_IDS  = json.loads(os.environ.get("ASSISTANCE_CATEGORY_IDS")  or "[]")
