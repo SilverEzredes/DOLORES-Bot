@@ -1,13 +1,19 @@
 from fuzzywuzzy import process, fuzz
 from PIL import Image, ImageFont
+from discord.ext import commands
+from discord import app_commands
 import itertools
+import traceback
 import datetime
 import aiofiles
 import discord
+import inspect
+import asyncio
 import base64
 import zlib
 import json
 import sys
+import ast
 import io
 import os
 
@@ -43,7 +49,7 @@ async def get_db():
         async with aiofiles.open('db.sqlite3', 'wb') as f:
             await f.write(decompressed)
     await db.init_db()
-    print("Initialized DB!")
+    globals.log.info("Initialized DB")
 
 
 # Save database
@@ -70,7 +76,7 @@ async def save_db():
                                               }
                                           })) as req:
                 if not req.ok:
-                    print(f"Failed to save config! Code: {req.status}, Message: {await req.text()}")
+                    globals.log.error(f"Failed to save config, code: {req.status}, message: {await req.text()}")
                     return False
                 return True
         elif globals.DB_HOST_TYPE == "writeas":
@@ -84,42 +90,25 @@ async def save_db():
                                              "font": "code"
                                          })) as req:
                 if not req.ok:
-                    print(f"Failed to save config! Code: {req.status}, Message: {await req.text()}")
+                    globals.log.error(f"Failed to save config, code: {req.status}, message: {await req.text()}")
                     return False
                 return True
         else:
             raise Exception("No valid DB type specified!")
 
 
-# Restart the bot, dyno restart on heroku
+# Restart the bot
 async def restart():
-    print("Saving DB...")
+    globals.log.info("Saving DB...")
     await db.save_to_disk()
     admin = globals.bot.get_user(globals.ADMIN_ID)
     if admin:
         await admin.send(file=discord.File('db.sqlite3'))
     await save_db()
     await globals.db.close()
-    print("Restarting...")
-    if os.environ.get("DYNO"):
-        async with globals.http.delete(f'https://api.heroku.com/apps/{os.environ.get("HEROKU_APP_NAME")}/dynos/{os.environ["DYNO"]}',
-                                       headers={
-                                           'Authorization': f'Bearer {globals.HEROKU_TOKEN}',
-                                           'Accept':        'application/vnd.heroku+json; version=3'
-                                       }) as req:
-            response = await req.text()
-            if not req.ok:
-                admin = globals.bot.get_user(globals.ADMIN_ID)
-                if admin:
-                    await admin.send(embed=custom_embed(list(globals.bot.guilds)[0],
-                                                        title="Failed to Restart!",
-                                                        description=response,
-                                                        fields=[
-                                                            ["Status:", f"{req.status}", True]
-                                                        ]))
-    else:
-        import main  # I know, I know, please Lord forgive me
-        os.execl(sys.executable, 'python', main.__file__, *sys.argv[1:])
+    globals.log.info("Restarting...")
+    import main  # I know, I know, please Lord forgive me
+    os.execl(sys.executable, 'python', main.__file__, *sys.argv[1:])
 
 
 # Setup persistent image components
@@ -165,6 +154,14 @@ def bytes_to_binary_object(bytes_arr):
     binary.write(bytes_arr)
     binary.seek(0)
     return binary
+
+
+# Dump traceback as string
+def get_traceback(*exc_info: list):
+    exc_info = exc_info or sys.exc_info()
+    tb_lines = traceback.format_exception(*exc_info)
+    tb = "".join(tb_lines)
+    return tb
 
 
 # Save link image into an image object for use with pillow
@@ -267,13 +264,6 @@ def time_from_start():
     return str(datetime.timedelta(seconds=int(elapsed_seconds)))
 
 
-# Format time until next bot restart
-def time_to_restart():
-    now = datetime.datetime.utcnow()
-    missing_seconds = (globals.restart_dt - now).total_seconds()
-    return str(datetime.timedelta(seconds=int(missing_seconds)))
-
-
 # Convert byte size amount into human readable format
 def pretty_size(size, precision=0):
     suffixes = ['B','KB','MB','GB','TB']
@@ -284,6 +274,134 @@ def pretty_size(size, precision=0):
     return "%.*f%s" % (precision, size, suffixes[suffix_index])
 
 
+# Hybrid group decorator that syncs aliases with slashcommands
+def hybgroup(bot, **kwargs):
+    def decorator(func):
+        _app_groups = []
+        extras = kwargs.pop("extras", {})
+        extras.update({
+            "_app_groups": _app_groups
+        })
+        group = commands.group(extras=extras, **kwargs)(func)
+        extras.update({
+            "_group": group
+        })
+        short_desc = kwargs.get("description", "").split("\n")[0][:99] or discord.utils.MISSING
+        for alias in [kwargs.get("name", discord.utils.MISSING)] + kwargs.get("aliases", []):
+            # Rename
+            if alias is discord.utils.MISSING:
+                alias = group.name
+            # Create group
+            if alias == group.name:
+                desc = short_desc
+            else:
+                desc = f"Alias for /{group.name}. "
+                if short_desc is not discord.utils.MISSING:
+                    desc += ". " + short_desc[:99 - len(desc)]
+            app_group = app_commands.Group(name=alias, description=desc, extras=extras)
+            bot.tree.add_command(app_group)
+            _app_groups.append(app_group)
+        return group
+    return decorator
+
+
+# Hybrid command decorator that syncs aliases, checks and cooldowns with slashcommands
+def hybcommand(bot, group=None, check_func=None, check_title=None, check_desc=None, cooldown_rate=None, cooldown_time=None, cooldown_key=None, cooldown_title=None, cooldown_desc=None, **kwargs):
+    def decorator(func):
+        _app_commands = []
+        extras = kwargs.pop("extras", {})
+        extras.update({
+            "_app_commands": _app_commands,
+            "check_title": check_title,
+            "check_desc": check_desc,
+            "cooldown_title": cooldown_title,
+            "cooldown_desc": cooldown_desc
+        })
+        if group:
+            command = group.command(extras=extras, **kwargs)(func)
+        else:
+            command = commands.command(extras=extras, **kwargs)(func)
+        extras.update({
+            "_command": command
+        })
+        if cooldown_rate:
+            async def app_cooldown_key(interaction):
+                ctx = await commands.Context.from_interaction(interaction)
+                return cooldown_key(ctx)
+            cooldown_mapping = {}
+            def cooldown_factory(ctx):
+                key = cooldown_key(ctx)
+                if key not in cooldown_mapping:
+                    cooldown_mapping[key] = app_commands.Cooldown(rate=cooldown_rate, per=cooldown_time)
+                return cooldown_mapping[key]
+            async def app_cooldown_factory(interaction):
+                key = await app_cooldown_key(interaction)
+                if key not in cooldown_mapping:
+                    cooldown_mapping[key] = app_commands.Cooldown(rate=cooldown_rate, per=cooldown_time)
+                return cooldown_mapping[key]
+            cooldown = commands.dynamic_cooldown(cooldown=cooldown_factory, type=cooldown_key)
+            app_cooldown = app_commands.checks.dynamic_cooldown(factory=app_cooldown_factory, key=app_cooldown_key)
+            cooldown(command)
+        if check_func:
+            check = commands.check(check_func)
+            async def app_check_func(interaction):
+                    ctx = await commands.Context.from_interaction(interaction)
+                    return check_func(ctx)
+            app_check = app_commands.check(app_check_func)
+            check(command)
+        short_desc = kwargs.get("description", "").split("\n")[0][:99] or discord.utils.MISSING
+        # Get source and remove decorator(s)
+        convert = ast.parse("ctx = await commands.Context.from_interaction(ctx)").body[0]
+        lines = inspect.getsourcelines(func)[0]
+        for i, line in enumerate(lines):
+            if line.lstrip().startswith("async def "):
+                lines = lines[i:]
+                break
+        # Remove indentation
+        while all(line.startswith(" ") for line in lines):
+            for i in range(len(lines)):
+                lines[i] = lines[i][1:]
+        source = "".join(lines)
+        for alias in [kwargs.get("name", discord.utils.MISSING)] + kwargs.get("aliases", []):
+            # Parse and manipulate
+            ast_tree = ast.parse(source)
+            fn = ast_tree.body[0]
+            fn.args.args.pop(0)  # Remove "self"
+            fn.body.insert(0, convert)  # Interaction to Context
+            # Rename
+            if alias is discord.utils.MISSING:
+                alias = command.name
+            fn.name = f"_{command.name}_{alias}"
+            # Reassemble
+            code = compile(ast_tree,"<string>", mode='exec')
+            env = func.__globals__  # Imports and other shenanigans
+            exec(code, env)
+            new_func = env[fn.name]
+            # Create command
+            if alias == command.name:
+                desc = short_desc
+            else:
+                desc = f"Alias for /{command.name}"
+                if short_desc is not discord.utils.MISSING:
+                    desc += ". " + short_desc[:99 - len(desc)]
+            if group:
+                for app_group in group.extras.get("_app_groups", []):
+                    app_command = app_group.command(name=alias, description=desc, extras=extras)(new_func)
+                    if cooldown_rate:
+                        app_cooldown(app_command)
+                    if check_func:
+                        app_check(app_command)
+            else:
+                app_command = bot.tree.command(name=alias, description=desc, extras=extras)(new_func)
+                if cooldown_rate:
+                    app_cooldown(app_command)
+                if check_func:
+                    app_check(app_command)
+            _app_commands.append(app_command)
+        return command
+    return decorator
+
+
 # Streamlined embeds
 def custom_embed(guild, *, title="", description="", fields=[], thumbnail=None, image=None, add_timestamp=True):
     if add_timestamp:
@@ -292,13 +410,13 @@ def custom_embed(guild, *, title="", description="", fields=[], thumbnail=None, 
                                        color=discord.Color(0xFFA724),
                                        timestamp=datetime.datetime.utcnow())
                                        .set_footer(text=guild.name,
-                                                   icon_url=guild.icon_url))
+                                                   icon_url=getattr(guild.icon, "url", None)))
     else:
         embed_to_send = (discord.Embed(title=title,
                                        description=description,
                                        color=discord.Color(0xFFA724))
                                        .set_footer(text=guild.name,
-                                                   icon_url=guild.icon_url))
+                                                   icon_url=getattr(guild.icon, "url", None)))
     if image:
         embed_to_send.set_image(url=image)
     if thumbnail:
@@ -333,14 +451,24 @@ async def imgur_image_upload(img: bytes):
                                      }) as req:
             resp = await req.json()
             if not req.ok:
-                print(resp)
+                globals.log.error(resp)
         return resp["data"]["link"]
     except Exception as exc:
         raise errors.ImgurError(exc_info=sys.exc_info(), resp=resp) from exc
 
 
+# Defer slash response with ephemeral calculation
+async def defer(ctx, ephemeral=None):
+    if ephemeral is None:
+        if ctx.channel.id in (globals.REQUESTS_CHANNEL_IDS.get(str(ctx.guild.id)) or []):
+            ephemeral = True
+        else:
+            ephemeral = bool(ctx.channel.id not in globals.BLACKLISTED_CHANNELS_IDS)
+    await ctx.defer(ephemeral=ephemeral)
+
+
 # Cleaner reply function
-async def embed_reply(ctx, *, content="", title="", description="", fields=[], thumbnail=None, image=None, add_timestamp=True):
+async def embed_reply(ctx, *, content="", title="", description="", fields=[], thumbnail=None, image=None, add_timestamp=True, ephemeral=None, **kwargs):
     embed_to_send = custom_embed(ctx.guild,
                                  title=title,
                                  description=description,
@@ -348,8 +476,28 @@ async def embed_reply(ctx, *, content="", title="", description="", fields=[], t
                                  thumbnail=thumbnail,
                                  image=image,
                                  add_timestamp=add_timestamp)
-    await ctx.reply(content,
-                    embed=embed_to_send)
+    if ephemeral is None:
+        if ctx.channel.id in (globals.REQUESTS_CHANNEL_IDS.get(str(ctx.guild.id)) or []):
+            ephemeral = True
+        else:
+            ephemeral = bool(ctx.channel.id not in globals.BLACKLISTED_CHANNELS_IDS)
+    if ephemeral or ephemeral is not bool(ephemeral):
+        if ephemeral is bool(ephemeral):
+            ephemeral = 5
+        if getattr(ctx, "interaction", None):
+            kwargs["ephemeral"] = True
+        else:
+            kwargs["delete_after"] = ephemeral
+    ret = await ctx.reply(content,
+                          embed=embed_to_send,
+                          **kwargs)
+    if ephemeral is not bool(ephemeral) and not getattr(ctx, "interaction", None):
+        await asyncio.sleep(ephemeral)
+        try:
+            await ctx.message.delete()
+        except Exception:
+            pass
+    return ret
 
 
 # Get all possible case variations for a string

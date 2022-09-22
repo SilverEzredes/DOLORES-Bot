@@ -1,31 +1,35 @@
 from discord.ext import commands, tasks
-import functools
 import datetime
 import discord
 import aiohttp
 import asyncio
+import logging
 import signal
 import uvloop
 import json
-import time
+import io
 import os
-
-# Flush on every print so logs work properly
-print = functools.partial(print, flush=True)
 
 # Asyncio drop-in replacement, 2-4x faster
 uvloop.install()
 
-# Local imports
-from modules import globals, db, utils, xp
-
-# Setup globals
-globals.loop = asyncio.get_event_loop()
+# Setup globals and logging
+from modules import globals
+_log = logging.getLogger()
+_log.setLevel(logging.INFO)
+_handler = logging.StreamHandler()
+_handler.setFormatter(discord.utils._ColourFormatter())
+_log.addHandler(_handler)
+globals.log = logging.getLogger(__name__.strip("_"))
 globals.cur_presence = 0
 if os.path.exists("config.json"):
     with open("config.json", "rb") as f:
         config = json.load(f)
         os.environ.update(config)
+        globals.log.info("Loaded custom config")
+
+# Local imports
+from modules import db, utils, xp
 
 globals.ADMIN_ID                 = int       (os.environ.get("ADMIN_ID")                 or 0)
 globals.ASSISTANCE_CATEGORY_IDS  = json.loads(os.environ.get("ASSISTANCE_CATEGORY_IDS")  or "[]")
@@ -41,7 +45,6 @@ globals.GITHUB_GIST_FILENAME     = str       (os.environ.get("GITHUB_GIST_FILENA
 globals.GITHUB_GIST_ID           = str       (os.environ.get("GITHUB_GIST_ID")           or "")
 globals.GITHUB_GIST_TOKEN        = str       (os.environ.get("GITHUB_GIST_TOKEN")        or "")
 globals.GITHUB_GIST_USER         = str       (os.environ.get("GITHUB_GIST_USER")         or "")
-globals.HEROKU_TOKEN             = str       (os.environ.get("HEROKU_TOKEN")             or "")
 globals.ICON_ROLE_IDS            = json.loads(os.environ.get("ICON_ROLE_IDS")            or "{}")
 globals.IMGUR_CLIENT_ID          = str       (os.environ.get("IMGUR_CLIENT_ID")          or "")
 globals.JOIN_LOG_CHANNEL_IDS     = json.loads(os.environ.get("JOIN_LOG_CHANNEL_IDS")     or "{}")
@@ -63,18 +66,16 @@ globals.XP_AMOUNT                = int       (os.environ.get("XP_AMOUNT")       
 globals.XP_COOLDOWN              = int       (os.environ.get("XP_COOLDOWN")              or 30)
 
 
-# Only start bot if running as main and not import
-if __name__ == '__main__':
+async def main():
 
     # Make persistent image components
     utils.setup_persistent_components()
 
     # Create persistent aiohttp session
-    async def make_aiohttp_session(): globals.http = aiohttp.ClientSession()
-    globals.loop.run_until_complete(make_aiohttp_session())
+    globals.http = aiohttp.ClientSession()
 
     # Fetch database
-    globals.loop.run_until_complete(utils.get_db())
+    await utils.get_db()
 
     # Periodically save database
     async def database_loop():
@@ -86,9 +87,9 @@ if __name__ == '__main__':
                 if admin:
                     await admin.send(file=discord.File('db.sqlite3'))
                 else:
-                    print("Couldn't DM database backup!")
+                    globals.log.error("Failed to DM database backup")
             await utils.save_db()
-    globals.loop.create_task(database_loop())
+    asyncio.get_event_loop().create_task(database_loop())
 
     # Enable intents
     intents = discord.Intents.default()
@@ -97,66 +98,110 @@ if __name__ == '__main__':
     # Avoid unwanted chaos
     allowed_mentions = discord.AllowedMentions(everyone=False, roles=False)
     # Create bot
-    globals.bot = commands.Bot(command_prefix=utils.case_insensitive(globals.BOT_PREFIX), case_insensitive=True, intents=intents, allowed_mentions=allowed_mentions)
+    globals.bot = commands.Bot(
+        command_prefix=utils.case_insensitive(globals.BOT_PREFIX),
+        case_insensitive=True,
+        description="Custom Discord bot for the Cyberpunk 2077 Modding Servers",
+        intents=discord.Intents.default() | discord.Intents(discord.Intents.message_content.flag) | discord.Intents(discord.Intents.members.flag) | discord.Intents(discord.Intents.presences.flag),
+        allowed_mentions=discord.AllowedMentions(everyone=False, roles=False),
+    )
     globals.bot.remove_command('help')
-    globals.bot.load_extension('cogs.bot')
-    globals.bot.load_extension('cogs.fun')
-    globals.bot.load_extension('cogs.levelling')
-    globals.bot.load_extension('cogs.requests')
-    globals.bot.load_extension('cogs.utilities')
-    globals.bot.load_extension('cogs.staff')
-    globals.bot.load_extension('cogs.retools')
-    globals.bot.load_extension('jishaku')
+    await globals.bot.load_extension('cogs.bot')
+    await globals.bot.load_extension('cogs.fun')
+    await globals.bot.load_extension('cogs.levelling')
+    await globals.bot.load_extension('cogs.requests')
+    await globals.bot.load_extension('cogs.utilities')
+    await globals.bot.load_extension('cogs.staff')
+    await globals.bot.load_extension('cogs.retools')
+    await globals.bot.load_extension('jishaku')
+    globals.log.info('Loaded cogs')
 
     # On ready, fires when fully connected to Discord
     @globals.bot.event
     async def on_ready():
-        print(f'Logged in as {globals.bot.user}!')
+        globals.log.info(f"Logged in as: {globals.bot.user}")
+        await globals.bot.tree.sync()
+        globals.log.info("Synced slash commands")
         if not update_presence_loop.is_running():
             update_presence_loop.start()
-        # Compute next restart time
-        now = datetime.datetime.utcnow()
-        midnight = datetime.time(0, 0)
-        next_midnight = datetime.datetime.combine(now, midnight)
-        if next_midnight < now:
-            next_midnight += datetime.timedelta(days=1)
-        globals.start_dt = now
-        globals.restart_dt = next_midnight
-        # Exit after saving DB
-        async def graceful_exit():
-            print("Saving DB...")
-            await db.save_to_disk()
-            admin = globals.bot.get_user(globals.ADMIN_ID)
-            if admin:
-                await admin.send(file=discord.File('db.sqlite3'))
-            await utils.save_db()
-            await globals.db.close()
-            print("Exiting...")
-            update_presence_loop.stop()
-            globals.loop.stop()
-            os._exit(os.EX_OK)
-        # Schedule graceful exit for kill signals
-        for signame in ['SIGINT', 'SIGTERM']:
-            globals.loop.add_signal_handler(getattr(signal, signame), lambda: globals.loop.create_task(graceful_exit()))
-        # Wait until restart time
-        await discord.utils.sleep_until(globals.restart_dt)
-        # Force restart
-        await utils.restart()
+        globals.log.info("Started status loop")
+        globals.start_dt = datetime.datetime.utcnow()
 
     # Ignore command not found errors
     @globals.bot.event
     async def on_command_error(ctx, error):
-        if isinstance(error, commands.errors.CommandNotFound):
+        def is_(e_type):
+            if isinstance(error, e_type):
+                return True
+            for inherit in type(error).__mro__:
+                if inherit.__name__ == e_type.__name__:
+                    return True
+            return False
+        e = commands.errors
+        # No cooldown for command errors
+        if not is_(e.CommandOnCooldown) and ctx.command and hasattr(ctx.command, "reset_cooldown"):
+            ctx.command.reset_cooldown(ctx)
+        # Actual error handling
+        if is_(e.CommandNotFound) or is_(e.DisabledCommand):
             await utils.embed_reply(ctx,
-                                    title=f'💢 Unknown command "{ctx.invoked_with}"!',
+                                    title=f'💢 Unknown command "a/{ctx.invoked_with}"!',
                                     description=f"Did you mean **`{globals.BOT_PREFIX.lower()}{utils.get_best_command_match(ctx.invoked_with)}`**?")
-            return
-        if isinstance(error, commands.errors.NotOwner):
+        elif is_(e.CommandOnCooldown):
+            c = error.cooldown
+            retry_in = str(datetime.timedelta(seconds=int(error.retry_after)))
+            title = (ctx.command.extras.get("cooldown_title", None) or "You're on cooldown!").format(retry_in=retry_in)
+            desc = ctx.command.extras.get("cooldown_desc", None)
+            if desc is False:
+                desc = ""
+            else:
+                desc = (desc or f"You can only do that {'once' if c.rate == 1 else f'{c.rate} times'} every **{f'{c.per/3600:.0f} hours' if c.per > 3600 else f'{c.per/60:.0f} minutes' if c.per > 60 else f'{c.per/3600:.0f} seconds'}**").format(retry_in=retry_in)
             await utils.embed_reply(ctx,
-                                    title="💢 Yea, that's not happening buddy!",
-                                    thumbnail=globals.NO_PERM_ICON)
-            return
-        raise error
+                                    title=f"💢 {title}",
+                                    description=desc + "\n"
+                                                f"Come back in **{retry_in}** and try again")
+        elif is_(e.MissingRequiredArgument) or is_(e.MissingRequiredAttachment):
+            await utils.embed_reply(ctx,
+                                    title=f"💢 Missing argument for '{ctx.current_parameter.name}'!",
+                                    description=f"**Usage**: `{ctx.command.usage.format(prfx=globals.BOT_PREFIX.lower())}`\n" +
+                                                ctx.command.help)
+        elif is_(e.BadArgument) or is_(e.BadUnionArgument) or is_(e.BadLiteralArgument) or is_(e.ConversionError):
+            await utils.embed_reply(ctx,
+                                    title=f"💢 Bad argument for '{ctx.current_parameter.name}'!",
+                                    description=f"**Your input**: {ctx.current_argument}\n" +
+                                                str(error))
+        elif is_(e.ArgumentParsingError):
+            await utils.embed_reply(ctx,
+                                    title=f"💢 Failed parsing command input!",
+                                    description=f"**Usage**: `{ctx.command.usage.format(prfx=globals.BOT_PREFIX.lower())}`\n" +
+                                                ctx.command.help)
+        elif is_(e.NotOwner) or is_(e.CheckFailure) or is_(e.CheckAnyFailure):
+            title = ctx.command.extras.get("check_title", None)
+            desc = ctx.command.extras.get("check_desc", None)
+            if title or desc:
+                await utils.embed_reply(ctx,
+                                        title=f"💢 {title}",
+                                        description=desc)
+            else:
+                await utils.embed_reply(ctx,
+                                        title="💢 Yea, that's not happening buddy!",
+                                        description="Nice try kid lmao",
+                                        thumbnail=globals.NO_PERM_ICON)
+        elif is_(e.CommandInvokeError):
+            globals.log.error(utils.get_traceback(error))
+            try:
+                await utils.embed_reply(ctx,
+                                        title=f"💢 Error executing command!",
+                                        description="Check the **attached text file** for a full traceback.",
+                                        file=discord.File(io.StringIO(utils.get_traceback(error)), filename="traceback.txt", spoiler=True))
+            except discord.errors.DiscordException:
+                pass
+        else:
+            raise error
+
+    @globals.bot.tree.error
+    async def on_error(interaction, error):
+        ctx = await commands.Context.from_interaction(interaction)
+        return await on_command_error(ctx, error)
 
     # Greet user when they join
     @globals.bot.event
@@ -172,26 +217,26 @@ if __name__ == '__main__':
                                                                     (f"Head to <#{globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]['selfrole_channel_id']}> and react to Master of Unlocking to gain access to the rest of the server!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]["selfrole_channel_id"] else "") +
                                                                     "\n" +
                                                                     "Enjoy your stay!",
-                                                        thumbnail=member.avatar_url))
+                                                        thumbnail=member.display_avatar.url))
 
     # Message handler and callback dispatcher
     @globals.bot.event
     async def on_message(message):
         if not message.guild:
             return
-        req_channels = globals.REQUESTS_CHANNEL_IDS.get(str(message.guild.id)) or ()
+        req_channels = globals.REQUESTS_CHANNEL_IDS.get(str(message.guild.id)) or []
+        lowered_content = message.content and message.content.lower()
         if message.channel.id in req_channels:
-            if message.content and utils.is_requests_command(message.content):
+            if message.content and utils.is_requests_command(lowered_content):
                 await globals.bot.process_commands(message)
+            elif message.author.bot:
+                if message.author.id != globals.bot.user.id:
+                    await message.delete()
             elif not utils.is_staff(message.author):
-                await message.delete()
-                try:
-                    await message.author.send(embed=utils.custom_embed(message.guild,
-                                                                       title="💢 Only relevant commands are allowed in mod requests channels!",
-                                                                       description="Check the pinned messages for more information!"))
-                except Exception:
-                    pass
-        elif message.content and message.content.lower().startswith(globals.BOT_PREFIX.lower()):
+                await utils.embed_reply(message,
+                                        title="💢 Only mod request commands here!",
+                                        description="Check the pinned messages for more information!")
+        elif message.content and lowered_content.startswith(globals.BOT_PREFIX.lower()):
             await globals.bot.process_commands(message)
         else:
             await xp.process_xp(message)
@@ -199,7 +244,7 @@ if __name__ == '__main__':
     # Handle deleting requests by staff
     @globals.bot.event
     async def on_raw_message_delete(payload):
-        req_channels = globals.REQUESTS_CHANNEL_IDS.get(str(payload.guild_id)) or ()
+        req_channels = globals.REQUESTS_CHANNEL_IDS.get(str(payload.guild_id)) or []
         if payload.channel_id in req_channels:
             await db.delete_request(msg=payload)
 
@@ -219,26 +264,38 @@ if __name__ == '__main__':
             await globals.bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching,  name='the Blackwall'),  status=discord.Status.dnd)
             globals.cur_presence = 0
 
-    # Actually run the bot
-    while True:
+    # Exit after saving DB
+    async def graceful_exit():
+        globals.log.info("Saving DB...")
         try:
-            globals.loop.run_until_complete(globals.bot.start(globals.DISCORD_TOKEN))
-        except discord.LoginFailure:
-            # Invalid token
-            print("BAD TOKEN!")
-            globals.loop.run_until_complete(globals.bot.http.close())
-            break
-        except aiohttp.ClientConnectorError:
-            # Connection to Discord failed
-            print("CONNECTION ERROR! Sleeping 60 seconds...")
-            globals.loop.run_until_complete(globals.bot.http.close())
-            time.sleep(60)
-            continue
-        except KeyboardInterrupt:
-            print("INTERRUPTED BY USER! Exiting...")
-            globals.loop.run_until_complete(globals.bot.close())
-            break
-        globals.loop.run_until_complete(globals.bot.http.close())
-        globals.loop.run_until_complete(globals.http.close())
-        time.sleep(10)
-        globals.loop.run_until_complete(make_aiohttp_session())
+            await db.save_to_disk()
+        except Exception:
+            globals.log.error("Failed to save DB to disk")
+        try:
+            await utils.save_db()
+        except Exception:
+            globals.log.error("Failed to save remote DB")
+        try:
+            admin = globals.bot.get_user(globals.ADMIN_ID)
+            if admin:
+                await admin.send(file=discord.File('db.sqlite3'))
+        except Exception:
+            globals.log.error("Failed to DM database backup")
+        try:
+            await globals.db.close()
+        except Exception:
+            globals.log.error("Failed to close DB gracefully")
+        globals.log.info("Exiting...")
+        update_presence_loop.stop()
+        asyncio.get_event_loop().stop()
+        os._exit(os.EX_OK)
+    # Schedule graceful exit for kill signals
+    for signame in ['SIGINT', 'SIGTERM']:
+        asyncio.get_event_loop().add_signal_handler(getattr(signal, signame), lambda: asyncio.get_event_loop().create_task(graceful_exit()))
+
+    # Actually run the bot
+    await globals.bot.start(globals.DISCORD_TOKEN)
+
+# Only start bot if running as main and not import
+if __name__ == '__main__':
+    asyncio.run(main())

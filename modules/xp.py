@@ -62,7 +62,12 @@ async def process_xp(message):
     level_xp_to_add  = 0
     cred_xp_to_add   = 0
     assistance_xp_to_add = 0
-    if message.channel.id in globals.CONTRIB_CHANNELS_IDS:
+    is_forum_chat = hasattr(message.channel, "parent") and isinstance(message.channel.parent, discord.ForumChannel)
+    if is_forum_chat and message.id == message.channel.id:  # Forum post channel has same id as its starter message
+        contrib_test_channel = message.channel.parent
+    else:
+        contrib_test_channel = message.channel
+    if contrib_test_channel.id in globals.CONTRIB_CHANNELS_IDS:
         try:
             contrib_cooldowns[message.author.id]
         except KeyError:
@@ -84,8 +89,9 @@ async def process_xp(message):
     await utils.manage_icon_role_for_user(message.author)
     # Revert contrib boost if message is deleted
     if added_contrib_boost:
+        watch_event = 'thread_delete' if is_forum_chat else 'message_delete'
         try:
-            await globals.bot.wait_for('message_delete', check=lambda msg: message == msg, timeout=600)
+            await globals.bot.wait_for(watch_event, check=lambda obj: message.id == obj.id, timeout=600)
             # Message was deleted, remove boost
             await db.add_user_xp(message.author.id, level=-level_xp_to_add, cred=-cred_xp_to_add, assistance=-assistance_xp_to_add)
             while globals.ticking_cooldowns:
@@ -103,10 +109,10 @@ async def notify_level_up(message, xp_type, old_lvl, new_lvl):
         img = Image.open(f"assets/levelup/{xp_type}_bg.png")
         draw = ImageDraw.Draw(img)
         # Draw user avatar
-        if str(message.author.avatar_url).startswith("https://cdn.discordapp.com/embed/avatars"):
+        if str(message.author.display_avatar.url).startswith("https://cdn.discordapp.com/embed/avatars"):
             avatar = globals.default_avatar.resize((84, 84))
         else:
-            avatar = (await utils.pil_img_from_link(str(message.author.avatar_url))).resize((84, 84,))
+            avatar = (await utils.pil_img_from_link(str(message.author.display_avatar.url))).resize((84, 84,))
         try:
             img.paste(avatar, (5, 5,), avatar)
         except ValueError:
@@ -141,6 +147,3 @@ async def tick_cooldowns():
         for user_id in to_remove:
             del contrib_cooldowns[user_id]
         globals.ticking_cooldowns = False
-
-
-asyncio.get_event_loop().create_task(tick_cooldowns())
