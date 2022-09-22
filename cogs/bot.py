@@ -97,7 +97,7 @@ class Bot(commands.Cog,
                                     ["👨‍💻 Developer", "[WillyJL](https://linktr.ee/WillyJL)",                                                                                   True],
                                     ["📚 Library",   f"discord.py v{discord.__version__}",                                                                                     True],
                                 ],
-                                thumbnail=globals.bot.user.avatar_url)
+                                thumbnail=globals.bot.user.display_avatar.url)
 
 
 async def setup(bot):

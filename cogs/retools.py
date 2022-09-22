@@ -1,8 +1,4 @@
 from discord.ext import commands
-import datetime
-import discord
-import psutil
-import os
 
 # Local imports
 from modules import globals, utils
@@ -13,7 +9,8 @@ class REtools(commands.Cog,
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="REFramework",
+    @utils.hybcommand(globals.bot,
+                      name="REFramework",
                       description="",
                       usage="{prfx}reframework",
                       help="",
@@ -30,7 +27,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994126039246700544.png")
 
-    @commands.command(name="Noesis_Plugin_REEM",
+    @utils.hybcommand(globals.bot,
+                      name="Noesis_Plugin_REEM",
                       description="",
                       usage="{prfx}noesisplugin",
                       help="",
@@ -46,7 +44,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
 
-    @commands.command(name="REtool",
+    @utils.hybcommand(globals.bot,
+                      name="REtool",
                       description="",
                       usage="{prfx}retool",
                       help="",
@@ -62,7 +61,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994126946680176751.png")
 
-    @commands.command(name="FluffyModManager",
+    @utils.hybcommand(globals.bot,
+                      name="FluffyModManager",
                       description="",
                       usage="{prfx}fluffymodmanager",
                       help="",
@@ -78,7 +78,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994126946680176751.png")
 
-    @commands.command(name="010--RE_RSZ",
+    @utils.hybcommand(globals.bot,
+                      name="010--RE_RSZ",
                       description="",
                       usage="{prfx}re_rsz",
                       help="",
@@ -95,7 +96,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="3DSmax--RE-Engine_Mesh_Tool",
+    @utils.hybcommand(globals.bot,
+                      name="3DSmax--RE-Engine_Mesh_Tool",
                       description="",
                       usage="{prfx}re_3dsmaxMesh",
                       help="",
@@ -111,7 +113,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
-    @commands.command(name="3DSmax--alphaZomega_Tool",
+    @utils.hybcommand(globals.bot,
+                      name="3DSmax--alphaZomega_Tool",
                       description="",
                       usage="{prfx}alphaZtool",
                       help="",
@@ -127,7 +130,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
-    @commands.command(name="3DSmax--ResetMesh",
+    @utils.hybcommand(globals.bot,
+                      name="3DSmax--ResetMesh",
                       description="",
                       usage="{prfx}resetmesh",
                       help="",
@@ -143,7 +147,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
-    @commands.command(name="010--Offset_Fixer",
+    @utils.hybcommand(globals.bot,
+                      name="010--Offset_Fixer",
                       description="",
                       usage="{prfx}offsetfixer",
                       help="",
@@ -160,7 +165,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="3DSmax--Motlist_Tool",
+    @utils.hybcommand(globals.bot,
+                      name="3DSmax--Motlist_Tool",
                       description="",
                       usage="{prfx}motlistTool",
                       help="",
@@ -176,7 +182,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
-    @commands.command(name="010--Motlist",
+    @utils.hybcommand(globals.bot,
+                      name="010--Motlist",
                       description="",
                       usage="{prfx}MotlistTemp",
                       help="",
@@ -192,7 +199,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--Motbank",
+    @utils.hybcommand(globals.bot,
+                      name="010--Motbank",
                       description="",
                       usage="{prfx}MotbankTemp",
                       help="",
@@ -208,7 +216,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--Mesh",
+    @utils.hybcommand(globals.bot,
+                      name="010--Mesh",
                       description="",
                       usage="{prfx}MeshTemp",
                       help="",
@@ -224,7 +233,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--MDF",
+    @utils.hybcommand(globals.bot,
+                      name="010--MDF",
                       description="",
                       usage="{prfx}MDFTemp",
                       help="",
@@ -240,7 +250,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--Chain",
+    @utils.hybcommand(globals.bot,
+                      name="010--Chain",
                       description="",
                       usage="{prfx}ChainTemp",
                       help="",
@@ -256,7 +267,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--GPUC",
+    @utils.hybcommand(globals.bot,
+                      name="010--GPUC",
                       description="",
                       usage="{prfx}GPUCTemp",
                       help="",
@@ -272,7 +284,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--CLIP-TML",
+    @utils.hybcommand(globals.bot,
+                      name="010--CLIP-TML",
                       description="",
                       usage="{prfx}CLIP-TMLTemp",
                       help="",
@@ -288,7 +301,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--GUI",
+    @utils.hybcommand(globals.bot,
+                      name="010--GUI",
                       description="",
                       usage="{prfx}GUITemp",
                       help="",
@@ -304,7 +318,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--FBXskel",
+    @utils.hybcommand(globals.bot,
+                      name="010--FBXskel",
                       description="",
                       usage="{prfx}FBXskelTemp",
                       help="",
@@ -320,7 +335,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--TEX",
+    @utils.hybcommand(globals.bot,
+                      name="010--TEX",
                       description="",
                       usage="{prfx}TEXTemp",
                       help="",
@@ -336,7 +352,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--EFX",
+    @utils.hybcommand(globals.bot,
+                      name="010--EFX",
                       description="",
                       usage="{prfx}EFXTemp",
                       help="",
@@ -352,7 +369,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="010--UVAR",
+    @utils.hybcommand(globals.bot,
+                      name="010--UVAR",
                       description="",
                       usage="{prfx}UVARTemp",
                       help="",
@@ -368,7 +386,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
-    @commands.command(name="MDF-Manager",
+    @utils.hybcommand(globals.bot,
+                      name="MDF-Manager",
                       description="",
                       usage="{prfx}MDFManager",
                       help="",
@@ -385,7 +404,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
-    @commands.command(name="RingingBloom",
+    @utils.hybcommand(globals.bot,
+                      name="RingingBloom",
                       description="",
                       usage="{prfx}RingingBloom",
                       help="",
@@ -402,7 +422,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
-    @commands.command(name="3DSmax--Fbxskel_Tool",
+    @utils.hybcommand(globals.bot,
+                      name="3DSmax--Fbxskel_Tool",
                       description="",
                       usage="{prfx}FbxskelTool",
                       help="",
@@ -418,7 +439,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
-    @commands.command(name="MSG-Tool",
+    @utils.hybcommand(globals.bot,
+                      name="MSG-Tool",
                       description="",
                       usage="{prfx}MSGTool",
                       help="",
@@ -432,9 +454,10 @@ class REtools(commands.Cog,
                                     ["🔗 Link:",          "[MSG Tool - Thread](https://discord.com/channels/718224210270617702/930092288330309683/940772924531552257)",                                                                                                                                          True],
                                     ["💻 Developer", "ponaromixxx",                                                                                                                                          True],
                                 ],
-                                thumbnail=globals.bot.user.avatar_url)
+                                thumbnail=globals.bot.user.display_avatar.url)
 
-    @commands.command(name="EMV-Engine",
+    @utils.hybcommand(globals.bot,
+                      name="EMV-Engine",
                       description="",
                       usage="{prfx}EMVEngine",
                       help="",
@@ -451,7 +474,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
 
-    @commands.command(name="BlenderPlugin",
+    @utils.hybcommand(globals.bot,
+                      name="BlenderPlugin",
                       description="",
                       usage="{prfx}BlenderPlugin",
                       help="",
@@ -468,7 +492,8 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994151478065373225.png")
 
-    @commands.command(name="RELit",
+    @utils.hybcommand(globals.bot,
+                      name="RELit",
                       description="",
                       usage="{prfx}RELit",
                       help="",
@@ -483,8 +508,8 @@ class REtools(commands.Cog,
                                     ["💻 Developer", "originalnicodr, Otis_inf",                                                                                                                                          True],
                                     ["📖 More Info:",       "[RELit - Thread](https://discord.com/channels/718224210270617702/930092288330309683/993615154845581323)",                                                                                                                                           True],
                                 ],
-                                thumbnail=globals.bot.user.avatar_url)
+                                thumbnail=globals.bot.user.display_avatar.url)
 
 
-def setup(bot):
-    bot.add_cog(REtools(bot))
+async def setup(bot):
+    await bot.add_cog(REtools(bot))
