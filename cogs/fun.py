@@ -16,8 +16,9 @@ class Fun(commands.Cog,
                       description="Roll someone a G+G+G blunt (cosmetic, no rewards)",
                       usage="{prfx}herb [ user ]",
                       help="user: the user to give a blunt to (ping, name, id) (optional)",
-                      aliases=["blunt", "based",])
-    async def cookie(self, ctx, user: discord.Member = None):
+                      aliases=["blunt", "based"],
+                      slash_aliases=False)
+    async def herb(self, ctx, user: discord.Member = None):
         if user and user.id != ctx.author.id:
             await utils.embed_reply(ctx,
                                     content=f"<@!{user.id}>",
@@ -37,8 +38,9 @@ class Fun(commands.Cog,
                       description="Treat someone with a delicious SewerChocolate™️ (cosmetic, no rewards)",
                       usage="{prfx}chocobar [ user ]",
                       help="user: the user to give a choco bar to (ping, name, id) (optional)",
-                      aliases=["chocolatebar", "sewerchocolate", "choco", "sewerchoco"])
-    async def burrito(self, ctx, user: discord.Member = None):
+                      aliases=["chocolatebar", "sewerchocolate", "choco", "sewerchoco"],
+                      slash_aliases=False)
+    async def chocobar(self, ctx, user: discord.Member = None):
         if user and user.id != ctx.author.id:
             await utils.embed_reply(ctx,
                                     content=f"<@!{user.id}>",
@@ -58,7 +60,8 @@ class Fun(commands.Cog,
                       description="Pat someone (cosmetic, no rewards)",
                       usage="{prfx}pat [ user ]",
                       help="user: the user to pat (ping, name, id) (optional)",
-                      aliases=["pet", "patpat"])
+                      aliases=["pet", "patpat"],
+                      slash_aliases=False)
     async def pat(self, ctx, user: discord.Member = None):
         if user and user.id != ctx.author.id:
             await utils.embed_reply(ctx,
@@ -79,7 +82,8 @@ class Fun(commands.Cog,
                       description="",
                       usage="{prfx}noisesplugin",
                       help="",
-                      aliases=["noises"])
+                      aliases=["noises"],
+                      slash_aliases=False)
     async def noisesplugin(self, ctx):
         desc = "A plugin for Rich Whitehouse's Noises to import and export\n RE Engine Meshes and Textures."
         await utils.embed_reply(ctx,
