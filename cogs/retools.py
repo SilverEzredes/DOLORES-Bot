@@ -14,7 +14,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}reframework",
                       help="",
-                      aliases=["ref"])
+                      aliases=["ref"],
+                      slash_aliases=False)
     async def reframework(self, ctx):
         desc = "A mod framework, scripting platform, and modding tool for\n RE Engine games."
         await utils.embed_reply(ctx,
@@ -32,7 +33,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}noesisplugin",
                       help="",
-                      aliases=["noesis", "reem", "plugin", "fmt", "fmtremesh", "newms"])
+                      aliases=["noesis", "reem", "plugin", "fmt", "fmtremesh", "newms"],
+                      slash_aliases=False)
     async def noesisplugin(self, ctx):
         desc = "A plugin for Rich Whitehouse's Noesis to import and export\n RE Engine Meshes and Textures."
         await utils.embed_reply(ctx,
@@ -49,7 +51,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}retool",
                       help="",
-                      aliases=["unpak"])
+                      aliases=["unpak"],
+                      slash_aliases=False)
     async def retool(self, ctx):
         desc = "A tool used for extracting the embedded game files from every\n RE Engine game's PAK files."
         await utils.embed_reply(ctx,
@@ -66,7 +69,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}fluffymodmanager",
                       help="",
-                      aliases=["fmm", "modmanager", "fluffy", "sockpuppet"])
+                      aliases=["fmm", "modmanager", "fluffy", "sockpuppet"],
+                      slash_aliases=False)
     async def fluffymodmanager(self, ctx):
         desc = "Fluffy Manager 5000 lets you manage mods for various titles,\n such as most Resident Evil titles, Devil May Cry 5, SoulCalibur VI, and more."
         await utils.embed_reply(ctx,
@@ -83,7 +87,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010-re_rsz",
                       help="",
-                      aliases=["rsz", "re_rsz", "holytemplate", "010rsz"])
+                      aliases=["rsz", "re_rsz", "holytemplate", "010rsz"],
+                      slash_aliases=False)
     async def re_rsz(self, ctx):
         desc = "010 Editor Binary Template for editing RE Engine game files contiaining RSZ data."
         await utils.embed_reply(ctx,
@@ -101,7 +106,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}3dsmax--re_3dsmaxmesh",
                       help="",
-                      aliases=["3ds", "re_3dsmaxmesh", "3dsmesh", "maxscript", "ogms"])
+                      aliases=["3ds", "re_3dsmaxmesh", "3dsmesh", "maxscript", "ogms"],
+                      slash_aliases=False)
     async def re_3dsmaxmesh(self, ctx):
         desc = "The original Maxscript created for importing and modifying\n RE2 mesh files, now works for all RE Engine games."
         await utils.embed_reply(ctx,
@@ -118,7 +124,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}3dsmax--alphazomegatool",
                       help="",
-                      aliases=["3dsalpha", "alphazomegatool", "maxscriptalpha", "msalpha", "azt"])
+                      aliases=["3dsalpha", "alphazomegatool", "maxscriptalpha", "msalpha", "azt"],
+                      slash_aliases=False)
     async def alphazomegatool(self, ctx):
         desc = "Alpha's Maxscript tool for 3DSmax is a kind of multi-tool used for various mesh-modding related tasks."
         await utils.embed_reply(ctx,
@@ -135,7 +142,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}3dsmax--resetmesh",
                       help="",
-                      aliases=["3dsreset", "resetmesh", "maxscriptreset", "msreset", "reset"])
+                      aliases=["3dsreset", "resetmesh", "maxscriptreset", "msreset", "reset"],
+                      slash_aliases=False)
     async def resetmesh(self, ctx):
         desc = "ResetMesh is an older 3dsmax script Alpha made to fix broken meshing without needing to re-import the mesh through Noesis."
         await utils.embed_reply(ctx,
@@ -152,7 +160,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--offsetfixer",
                       help="",
-                      aliases=["010offset", "offsetbt"])
+                      aliases=["010offset", "offsetbt"],
+                      slash_aliases=False)
     async def offsetfixer(self, ctx):
         desc = "This universal script can instantly update thousands of offsets in any file."
         await utils.embed_reply(ctx,
@@ -170,7 +179,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}3dsmax--motlisttool",
                       help="",
-                      aliases=["3dsmot", "3dsmotlist", "msmot"])
+                      aliases=["3dsmot", "3dsmotlist", "msmot"],
+                      slash_aliases=False)
     async def motlisttool(self, ctx):
         desc = "The motlist tool is a Maxscript that can export animations imported by RevilMax back to the game format, for full animation modding."
         await utils.embed_reply(ctx,
@@ -187,7 +197,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--motlisttemplate",
                       help="",
-                      aliases=["010mot", "motlisttemplate", "010motlist", "motlistbt", "motbt"])
+                      aliases=["010mot", "motlisttemplate", "010motlist", "motlistbt", "motbt"],
+                      slash_aliases=False)
     async def motlisttemplate(self, ctx):
         desc = "The motlist template is a helpful tool for editing RE Engine animations and their associated actions and effects."
         await utils.embed_reply(ctx,
@@ -204,7 +215,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--motbanktemplate",
                       help="",
-                      aliases=["010bank", "motbanktemplate", "010motbank", "motbankbt", "bankbt"])
+                      aliases=["010bank", "motbanktemplate", "010motbank", "motbankbt", "bankbt"],
+                      slash_aliases=False)
     async def motbanktemplate(self, ctx):
         desc = "The motbank template is used to edit motbank files from all RE Engine games."
         await utils.embed_reply(ctx,
@@ -221,7 +233,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--meshtemplate",
                       help="",
-                      aliases=["010mesh", "meshtemplate", "meshbt"])
+                      aliases=["010mesh", "meshtemplate", "meshbt"],
+                      slash_aliases=False)
     async def meshtemplate(self, ctx):
         desc = "The MESH template can edit RE Engine MESH model files, allowing you to do such things as edit/rename individual bones."
         await utils.embed_reply(ctx,
@@ -238,7 +251,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--mdftemplate",
                       help="",
-                      aliases=["010mdf", "mdftemplate", "mdfbt"])
+                      aliases=["010mdf", "mdftemplate", "mdfbt"],
+                      slash_aliases=False)
     async def mdftemplate(self, ctx):
         desc = "The MDF template allows you to edit the texture locations, material flags and parameters of each material."
         await utils.embed_reply(ctx,
@@ -255,7 +269,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--chaintemplate",
                       help="",
-                      aliases=["010chain", "chaintemplate", "chainbt"])
+                      aliases=["010chain", "chaintemplate", "chainbt"],
+                      slash_aliases=False)
     async def chaintemplate(self, ctx):
         desc = "The Chain template can be used to edit the properties of RE Engine chain physics files."
         await utils.embed_reply(ctx,
@@ -272,7 +287,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--gpuctemplate",
                       help="",
-                      aliases=["010gpuc", "gpuctemplate", "gpucbt"])
+                      aliases=["010gpuc", "gpuctemplate", "gpucbt"],
+                      slash_aliases=False)
     async def gpuctemplate(self, ctx):
         desc = "The GPUC template for 010 lets you edit the properties of physics cloth files."
         await utils.embed_reply(ctx,
@@ -289,7 +305,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--cliptmltemplate",
                       help="",
-                      aliases=["010clip", "cliptmltemplate", "010tml", "tmlbt", "clipbt"])
+                      aliases=["010clip", "cliptmltemplate", "010tml", "tmlbt", "clipbt"],
+                      slash_aliases=False)
     async def cliptmltemplate(self, ctx):
         desc = "The TML template edits RE engine timeline files (tml and clip)."
         await utils.embed_reply(ctx,
@@ -306,7 +323,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--guitemplate",
                       help="",
-                      aliases=["010gui", "guitemplate", "guibt"])
+                      aliases=["010gui", "guitemplate", "guibt"],
+                      slash_aliases=False)
     async def guitemplate(self, ctx):
         desc = "The GUI template can show you the properties of gui Graphical User Interface files."
         await utils.embed_reply(ctx,
@@ -323,7 +341,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--fbxskeltemplate",
                       help="",
-                      aliases=["010fbx", "fbxskeltemplate", "fbxbt", "010skel", "skelbt"])
+                      aliases=["010fbx", "fbxskeltemplate", "fbxbt", "010skel", "skelbt"],
+                      slash_aliases=False)
     async def fbxskeltemplate(self, ctx):
         desc = "The fbxskel template is used for editing fbxskel skeleton files from all RE Engine games."
         await utils.embed_reply(ctx,
@@ -340,7 +359,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--textemplate",
                       help="",
-                      aliases=["010tex", "textemplate", "texbt"])
+                      aliases=["010tex", "textemplate", "texbt"],
+                      slash_aliases=False)
     async def textemplate(self, ctx):
         desc = "The TEX template shows how the RE Engine tex texture format works."
         await utils.embed_reply(ctx,
@@ -357,7 +377,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--efxtemplate",
                       help="",
-                      aliases=["010efx", "efxtemplate", "efxbt", "010fx", "fxbt"])
+                      aliases=["010efx", "efxtemplate", "efxbt", "010fx", "fxbt"],
+                      slash_aliases=False)
     async def efxtemplate(self, ctx):
         desc = "The EFX template lets you change effects in RE Engine EFX files."
         await utils.embed_reply(ctx,
@@ -374,7 +395,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}010--uvartemplate",
                       help="",
-                      aliases=["010uvar", "uvartemplate", "uvarbt"])
+                      aliases=["010uvar", "uvartemplate", "uvarbt"],
+                      slash_aliases=False)
     async def uvartemplate(self, ctx):
         desc = "The UVAR template allows you to edit uvar 'uvariables' files from all RE Engine games."
         await utils.embed_reply(ctx,
@@ -391,7 +413,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}mdfmanager",
                       help="",
-                      aliases=["mdf", "mdftool"])
+                      aliases=["mdf", "mdftool"],
+                      slash_aliases=False)
     async def mdfmanager(self, ctx):
         desc = "MDF Manager is a great tool for editing material files in all RE Engine games."
         await utils.embed_reply(ctx,
@@ -409,7 +432,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}ringingbloom",
                       help="",
-                      aliases=["audiotool", "bnk", "rb"])
+                      aliases=["audiotool", "bnk", "rb"],
+                      slash_aliases=False)
     async def ringingbloom(self, ctx):
         desc = "RingingBloom is a helpful tool for audio modding in RE Engine games, editing PCK, BNK, wem and wwise files in a streamlined application."
         await utils.embed_reply(ctx,
@@ -427,7 +451,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}3dsmax--fbxskeltool",
                       help="",
-                      aliases=["3dsfbx", "fbxskeltool", "3dsfbxskel", "msfbx", "msskel"])
+                      aliases=["3dsfbx", "fbxskeltool", "3dsfbxskel", "msfbx", "msskel"],
+                      slash_aliases=False)
     async def fbxskeltool(self, ctx):
         desc = "The fbxskel tool is Maxscript for 3dsmax that can import and export fbxskel skeleton files from all RE Engine games."
         await utils.embed_reply(ctx,
@@ -444,7 +469,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}msgtool",
                       help="",
-                      aliases=["msg"])
+                      aliases=["msg"],
+                      slash_aliases=False)
     async def msgtool(self, ctx):
         desc = "The MSG Tool allows you to extract, edit and replace the contents of RE Engine MSG Files."
         await utils.embed_reply(ctx,
@@ -461,7 +487,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}emvengine",
                       help="",
-                      aliases=["emv", "console", "refconsole"])
+                      aliases=["emv", "console", "refconsole"],
+                      slash_aliases=False)
     async def emvengine(self, ctx):
         desc = "Alpha's REFramework scripts, which include an interactive Lua Console that can access your global script variables, useful for script development.\n Also includes: Gravity Gun, Console, Enhanced Model Viewer and Enemy Spawner."
         await utils.embed_reply(ctx,
@@ -479,7 +506,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}blenderplugin",
                       help="",
-                      aliases=["blender", "wrapper"])
+                      aliases=["blender", "wrapper"],
+                      slash_aliases=False)
     async def blenderplugin(self, ctx):
         desc = "This useful Blender addon utilizes the Noesis MESH plugin to let you to seamlessly import and export RE Engine MESH models directly from Blender."
         await utils.embed_reply(ctx,
@@ -497,7 +525,8 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}relit",
                       help="",
-                      aliases=["lights", "rel"])
+                      aliases=["lights", "rel"],
+                      slash_aliases=False)
     async def relit(self, ctx):
         desc = "It allows you to spawn lights in a scene for screenshotting purposes."
         await utils.embed_reply(ctx,
