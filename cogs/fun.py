@@ -75,7 +75,7 @@ class Fun(commands.Cog,
                                     thumbnail="https://cdn.discordapp.com/emojis/889190978001465476.gif")
 
     @utils.hybcommand(globals.bot,
-                      name="noises_Plugin_REEM",
+                      name="noisesplugin",
                       description="",
                       usage="{prfx}noisesplugin",
                       help="",

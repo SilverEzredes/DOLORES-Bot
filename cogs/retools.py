@@ -10,7 +10,7 @@ class REtools(commands.Cog,
         self.bot = bot
 
     @utils.hybcommand(globals.bot,
-                      name="REFramework",
+                      name="reframework",
                       description="",
                       usage="{prfx}reframework",
                       help="",
@@ -28,11 +28,11 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994126039246700544.png")
 
     @utils.hybcommand(globals.bot,
-                      name="Noesis_Plugin_REEM",
+                      name="noesisplugin",
                       description="",
                       usage="{prfx}noesisplugin",
                       help="",
-                      aliases=["noesis", "reem", "Plugin", "fmt", "fmtREmesh", "newMS"])
+                      aliases=["noesis", "reem", "plugin", "fmt", "fmtremesh", "newms"])
     async def noesisplugin(self, ctx):
         desc = "A plugin for Rich Whitehouse's Noesis to import and export\n RE Engine Meshes and Textures."
         await utils.embed_reply(ctx,
@@ -45,7 +45,7 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
 
     @utils.hybcommand(globals.bot,
-                      name="REtool",
+                      name="retool",
                       description="",
                       usage="{prfx}retool",
                       help="",
@@ -62,7 +62,7 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994126946680176751.png")
 
     @utils.hybcommand(globals.bot,
-                      name="FluffyModManager",
+                      name="fluffymodmanager",
                       description="",
                       usage="{prfx}fluffymodmanager",
                       help="",
@@ -79,11 +79,11 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994126946680176751.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--RE_RSZ",
+                      name="010-re_rsz",
                       description="",
-                      usage="{prfx}re_rsz",
+                      usage="{prfx}010-re_rsz",
                       help="",
-                      aliases=["rsz", "HolyTemplate", "010rsz"])
+                      aliases=["rsz", "re_rsz", "holytemplate", "010rsz"])
     async def re_rsz(self, ctx):
         desc = "010 Editor Binary Template for editing RE Engine game files contiaining RSZ data."
         await utils.embed_reply(ctx,
@@ -97,12 +97,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="3DSmax--RE-Engine_Mesh_Tool",
+                      name="3dsmax--re_3dsmaxmesh",
                       description="",
-                      usage="{prfx}re_3dsmaxMesh",
+                      usage="{prfx}3dsmax--re_3dsmaxmesh",
                       help="",
-                      aliases=["3ds", "3dsmesh", "MaxScript", "ogMS"])
-    async def re_3dsmaxMesh(self, ctx):
+                      aliases=["3ds", "re_3dsmaxmesh", "3dsmesh", "maxscript", "ogms"])
+    async def re_3dsmaxmesh(self, ctx):
         desc = "The original Maxscript created for importing and modifying\n RE2 mesh files, now works for all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="3DSmax MESH Script - RE-ENGINE MESH TOOL",
@@ -114,12 +114,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
     @utils.hybcommand(globals.bot,
-                      name="3DSmax--alphaZomega_Tool",
+                      name="3dsmax--alphazomegatool",
                       description="",
-                      usage="{prfx}alphaZtool",
+                      usage="{prfx}3dsmax--alphazomegatool",
                       help="",
-                      aliases=["3dsalpha", "MaxScriptAlpha", "MSalpha", "AZT"])
-    async def alphaZtool(self, ctx):
+                      aliases=["3dsalpha", "alphazomegatool", "maxscriptalpha", "msalpha", "azt"])
+    async def alphazomegatool(self, ctx):
         desc = "Alpha's Maxscript tool for 3DSmax is a kind of multi-tool used for various mesh-modding related tasks."
         await utils.embed_reply(ctx,
                                 title="alphaZomega Tool",
@@ -131,12 +131,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
     @utils.hybcommand(globals.bot,
-                      name="3DSmax--ResetMesh",
+                      name="3dsmax--resetmesh",
                       description="",
-                      usage="{prfx}resetmesh",
+                      usage="{prfx}3dsmax--resetmesh",
                       help="",
-                      aliases=["3dsreset", "MaxScriptReset", "MSreset", "reset"])
-    async def ResetMesh(self, ctx):
+                      aliases=["3dsreset", "resetmesh", "maxscriptreset", "msreset", "reset"])
+    async def resetmesh(self, ctx):
         desc = "ResetMesh is an older 3dsmax script Alpha made to fix broken meshing without needing to re-import the mesh through Noesis."
         await utils.embed_reply(ctx,
                                 title="ResetMesh",
@@ -148,12 +148,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--Offset_Fixer",
+                      name="010--offsetfixer",
                       description="",
-                      usage="{prfx}offsetfixer",
+                      usage="{prfx}010--offsetfixer",
                       help="",
                       aliases=["010offset", "offsetbt"])
-    async def OffsetFixer(self, ctx):
+    async def offsetfixer(self, ctx):
         desc = "This universal script can instantly update thousands of offsets in any file."
         await utils.embed_reply(ctx,
                                 title="Alpha's Offset Fixer",
@@ -166,12 +166,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="3DSmax--Motlist_Tool",
+                      name="3dsmax--motlisttool",
                       description="",
-                      usage="{prfx}motlistTool",
+                      usage="{prfx}3dsmax--motlisttool",
                       help="",
-                      aliases=["3dsmot", "3dsmotlist", "MSmot"])
-    async def MotlistTool(self, ctx):
+                      aliases=["3dsmot", "3dsmotlist", "msmot"])
+    async def motlisttool(self, ctx):
         desc = "The motlist tool is a Maxscript that can export animations imported by RevilMax back to the game format, for full animation modding."
         await utils.embed_reply(ctx,
                                 title="Motlist Tool",
@@ -183,12 +183,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--Motlist",
+                      name="010--motlisttemplate",
                       description="",
-                      usage="{prfx}MotlistTemp",
+                      usage="{prfx}010--motlisttemplate",
                       help="",
-                      aliases=["010mot", "010motlist", "motlistbt", "motbt"])
-    async def MotlistTemplate(self, ctx):
+                      aliases=["010mot", "motlisttemplate", "010motlist", "motlistbt", "motbt"])
+    async def motlisttemplate(self, ctx):
         desc = "The motlist template is a helpful tool for editing RE Engine animations and their associated actions and effects."
         await utils.embed_reply(ctx,
                                 title="Motlist Template",
@@ -200,12 +200,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--Motbank",
+                      name="010--motbanktemplate",
                       description="",
-                      usage="{prfx}MotbankTemp",
+                      usage="{prfx}010--motbanktemplate",
                       help="",
-                      aliases=["010bank", "010motbank", "motbankbt", "bankbt"])
-    async def MotbankTemplate(self, ctx):
+                      aliases=["010bank", "motbanktemplate", "010motbank", "motbankbt", "bankbt"])
+    async def motbanktemplate(self, ctx):
         desc = "The motbank template is used to edit motbank files from all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="Motbank Template",
@@ -217,12 +217,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--Mesh",
+                      name="010--meshtemplate",
                       description="",
-                      usage="{prfx}MeshTemp",
+                      usage="{prfx}010--meshtemplate",
                       help="",
-                      aliases=["010mesh", "meshbt"])
-    async def MeshTemplate(self, ctx):
+                      aliases=["010mesh", "meshtemplate", "meshbt"])
+    async def meshtemplate(self, ctx):
         desc = "The MESH template can edit RE Engine MESH model files, allowing you to do such things as edit/rename individual bones."
         await utils.embed_reply(ctx,
                                 title="Mesh Template",
@@ -234,12 +234,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--MDF",
+                      name="010--mdftemplate",
                       description="",
-                      usage="{prfx}MDFTemp",
+                      usage="{prfx}010--mdftemplate",
                       help="",
-                      aliases=["010mdf", "mdfbt"])
-    async def MDFTemplate(self, ctx):
+                      aliases=["010mdf", "mdftemplate", "mdfbt"])
+    async def mdftemplate(self, ctx):
         desc = "The MDF template allows you to edit the texture locations, material flags and parameters of each material."
         await utils.embed_reply(ctx,
                                 title="MDF Template",
@@ -251,12 +251,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--Chain",
+                      name="010--chaintemplate",
                       description="",
-                      usage="{prfx}ChainTemp",
+                      usage="{prfx}010--chaintemplate",
                       help="",
-                      aliases=["010chain", "chainbt"])
-    async def ChainTemplate(self, ctx):
+                      aliases=["010chain", "chaintemplate", "chainbt"])
+    async def chaintemplate(self, ctx):
         desc = "The Chain template can be used to edit the properties of RE Engine chain physics files."
         await utils.embed_reply(ctx,
                                 title="Chain Template",
@@ -268,12 +268,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--GPUC",
+                      name="010--gpuctemplate",
                       description="",
-                      usage="{prfx}GPUCTemp",
+                      usage="{prfx}010--gpuctemplate",
                       help="",
-                      aliases=["010gpuc", "gpucbt"])
-    async def GPUCTemplate(self, ctx):
+                      aliases=["010gpuc", "gpuctemplate", "gpucbt"])
+    async def gpuctemplate(self, ctx):
         desc = "The GPUC template for 010 lets you edit the properties of physics cloth files."
         await utils.embed_reply(ctx,
                                 title="GPUC Template",
@@ -285,12 +285,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--CLIP-TML",
+                      name="010--cliptmltemplate",
                       description="",
-                      usage="{prfx}CLIP-TMLTemp",
+                      usage="{prfx}010--cliptmltemplate",
                       help="",
-                      aliases=["010clip", "010tml", "tmlbt", "clipbt"])
-    async def CLIPTMLTemplate(self, ctx):
+                      aliases=["010clip", "cliptmltemplate", "010tml", "tmlbt", "clipbt"])
+    async def cliptmltemplate(self, ctx):
         desc = "The TML template edits RE engine timeline files (tml and clip)."
         await utils.embed_reply(ctx,
                                 title="CLIP-TML Template",
@@ -302,12 +302,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--GUI",
+                      name="010--guitemplate",
                       description="",
-                      usage="{prfx}GUITemp",
+                      usage="{prfx}010--guitemplate",
                       help="",
-                      aliases=["010gui", "guibt"])
-    async def GUITemplate(self, ctx):
+                      aliases=["010gui", "guitemplate", "guibt"])
+    async def guitemplate(self, ctx):
         desc = "The GUI template can show you the properties of gui Graphical User Interface files."
         await utils.embed_reply(ctx,
                                 title="GUI Template",
@@ -319,12 +319,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--FBXskel",
+                      name="010--fbxskeltemplate",
                       description="",
-                      usage="{prfx}FBXskelTemp",
+                      usage="{prfx}010--fbxskeltemplate",
                       help="",
-                      aliases=["010fbx", "fbxbt", "010skel", "skelbt"])
-    async def FBXskelTemplate(self, ctx):
+                      aliases=["010fbx", "fbxskeltemplate", "fbxbt", "010skel", "skelbt"])
+    async def fbxskeltemplate(self, ctx):
         desc = "The fbxskel template is used for editing fbxskel skeleton files from all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="FBXskel Template",
@@ -336,12 +336,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--TEX",
+                      name="010--textemplate",
                       description="",
-                      usage="{prfx}TEXTemp",
+                      usage="{prfx}010--textemplate",
                       help="",
-                      aliases=["010tex", "texbt"])
-    async def TEXTemplate(self, ctx):
+                      aliases=["010tex", "textemplate", "texbt"])
+    async def textemplate(self, ctx):
         desc = "The TEX template shows how the RE Engine tex texture format works."
         await utils.embed_reply(ctx,
                                 title="TEX Template",
@@ -353,12 +353,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--EFX",
+                      name="010--efxtemplate",
                       description="",
-                      usage="{prfx}EFXTemp",
+                      usage="{prfx}010--efxtemplate",
                       help="",
-                      aliases=["010efx", "efxbt", "010fx", "fxbt"])
-    async def EFXTemplate(self, ctx):
+                      aliases=["010efx", "efxtemplate", "efxbt", "010fx", "fxbt"])
+    async def efxtemplate(self, ctx):
         desc = "The EFX template lets you change effects in RE Engine EFX files."
         await utils.embed_reply(ctx,
                                 title="EFX Template",
@@ -370,12 +370,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="010--UVAR",
+                      name="010--uvartemplate",
                       description="",
-                      usage="{prfx}UVARTemp",
+                      usage="{prfx}010--uvartemplate",
                       help="",
-                      aliases=["010uvar", "uvarbt"])
-    async def UVARTemplate(self, ctx):
+                      aliases=["010uvar", "uvartemplate", "uvarbt"])
+    async def uvartemplate(self, ctx):
         desc = "The UVAR template allows you to edit uvar 'uvariables' files from all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="UVAR Template",
@@ -387,12 +387,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
     @utils.hybcommand(globals.bot,
-                      name="MDF-Manager",
+                      name="mdfmanager",
                       description="",
-                      usage="{prfx}MDFManager",
+                      usage="{prfx}mdfmanager",
                       help="",
-                      aliases=["MDF", "MDFtool"])
-    async def MDFManager(self, ctx):
+                      aliases=["mdf", "mdftool"])
+    async def mdfmanager(self, ctx):
         desc = "MDF Manager is a great tool for editing material files in all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="MDF Manager",
@@ -405,12 +405,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
     @utils.hybcommand(globals.bot,
-                      name="RingingBloom",
+                      name="ringingbloom",
                       description="",
-                      usage="{prfx}RingingBloom",
+                      usage="{prfx}ringingbloom",
                       help="",
-                      aliases=["AudioTool", "BNK", "RB"])
-    async def RingingBloom(self, ctx):
+                      aliases=["audiotool", "bnk", "rb"])
+    async def ringingbloom(self, ctx):
         desc = "RingingBloom is a helpful tool for audio modding in RE Engine games, editing PCK, BNK, wem and wwise files in a streamlined application."
         await utils.embed_reply(ctx,
                                 title="Ringing Bloom",
@@ -423,12 +423,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
     @utils.hybcommand(globals.bot,
-                      name="3DSmax--Fbxskel_Tool",
+                      name="3dsmax--fbxskeltool",
                       description="",
-                      usage="{prfx}FbxskelTool",
+                      usage="{prfx}3dsmax--fbxskeltool",
                       help="",
-                      aliases=["3dsFbx", "3dsFbxskel", "MSFbx", "MSskel"])
-    async def FbxskelTool(self, ctx):
+                      aliases=["3dsfbx", "fbxskeltool", "3dsfbxskel", "msfbx", "msskel"])
+    async def fbxskeltool(self, ctx):
         desc = "The fbxskel tool is Maxscript for 3dsmax that can import and export fbxskel skeleton files from all RE Engine games."
         await utils.embed_reply(ctx,
                                 title="Fbxskel Tool",
@@ -440,12 +440,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
 
     @utils.hybcommand(globals.bot,
-                      name="MSG-Tool",
+                      name="msgtool",
                       description="",
-                      usage="{prfx}MSGTool",
+                      usage="{prfx}msgtool",
                       help="",
                       aliases=["msg"])
-    async def MSGTool(self, ctx):
+    async def msgtool(self, ctx):
         desc = "The MSG Tool allows you to extract, edit and replace the contents of RE Engine MSG Files."
         await utils.embed_reply(ctx,
                                 title="MSG Tool",
@@ -457,12 +457,12 @@ class REtools(commands.Cog,
                                 thumbnail=globals.bot.user.display_avatar.url)
 
     @utils.hybcommand(globals.bot,
-                      name="EMV-Engine",
+                      name="emvengine",
                       description="",
-                      usage="{prfx}EMVEngine",
+                      usage="{prfx}emvengine",
                       help="",
-                      aliases=["EMV", "console", "REFconsole"])
-    async def EMVEngine(self, ctx):
+                      aliases=["emv", "console", "refconsole"])
+    async def emvengine(self, ctx):
         desc = "Alpha's REFramework scripts, which include an interactive Lua Console that can access your global script variables, useful for script development.\n Also includes: Gravity Gun, Console, Enhanced Model Viewer and Enemy Spawner."
         await utils.embed_reply(ctx,
                                 title="EMV Engine",
@@ -475,12 +475,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
 
     @utils.hybcommand(globals.bot,
-                      name="BlenderPlugin",
+                      name="blenderplugin",
                       description="",
-                      usage="{prfx}BlenderPlugin",
+                      usage="{prfx}blenderplugin",
                       help="",
-                      aliases=["Blender", "Wrapper"])
-    async def BlenderPlugin(self, ctx):
+                      aliases=["blender", "wrapper"])
+    async def blenderplugin(self, ctx):
         desc = "This useful Blender addon utilizes the Noesis MESH plugin to let you to seamlessly import and export RE Engine MESH models directly from Blender."
         await utils.embed_reply(ctx,
                                 title="Blender Wrapper",
@@ -493,12 +493,12 @@ class REtools(commands.Cog,
                                 thumbnail="https://cdn.discordapp.com/emojis/994151478065373225.png")
 
     @utils.hybcommand(globals.bot,
-                      name="RELit",
+                      name="relit",
                       description="",
-                      usage="{prfx}RELit",
+                      usage="{prfx}relit",
                       help="",
-                      aliases=["lights", "REL"])
-    async def RELit(self, ctx):
+                      aliases=["lights", "rel"])
+    async def relit(self, ctx):
         desc = "It allows you to spawn lights in a scene for screenshotting purposes."
         await utils.embed_reply(ctx,
                                 title="RELit",
