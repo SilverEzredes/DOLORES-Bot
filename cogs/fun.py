@@ -25,13 +25,15 @@ class Fun(commands.Cog,
                                     title="🍪🌿 Herb!",
                                     description=f"<@!{ctx.author.id}> just rolled you a G+G+G blunt of the greenest herb🌿!\n"
                                                 "A mixture of 3 Green Herbs. Completely restores health.",
-                                    thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png")
+                                    thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png",
+                                    ephemeral=False)
         else:
             await utils.embed_reply(ctx,
-                                    title="🌿 Herb!",
+                                    title="🍪🌿 Herb!",
                                     description=f"<@!{ctx.author.id}> found some funny looking plant and decided to smoke it🌿!\n"
                                                 "Herb that restores partial health.",
-                                    thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png")
+                                    thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png",
+                                    ephemeral=False)
 
     @utils.hybcommand(globals.bot,
                       name="chocobar",
@@ -47,13 +49,15 @@ class Fun(commands.Cog,
                                     title="🍫 Sewer Chocolate™️!",
                                     description=f"<@!{ctx.author.id}> just delivered you a delicious 🍫 Sewer Chocolate™️🍫!\n"
                                                 "Just don't look at the expiration date...",
-                                    thumbnail="https://cdn.discordapp.com/emojis/888191417556561980.png")
+                                    thumbnail="https://cdn.discordapp.com/emojis/888191417556561980.png",
+                                    ephemeral=False)
         else:
             await utils.embed_reply(ctx,
                                     title="🍫 Sewer Chocolate™️!",
                                     description=f"<@!{ctx.author.id}> found some 🍫 chocolate bar looking thing while exploring the sewers.\n"
                                                 "Are you really considering eating that?",
-                                    thumbnail="https://cdn.discordapp.com/emojis/888191417556561980.png")
+                                    thumbnail="https://cdn.discordapp.com/emojis/888191417556561980.png",
+                                    ephemeral=False)
 
     @utils.hybcommand(globals.bot,
                       name="pat",
@@ -69,13 +73,15 @@ class Fun(commands.Cog,
                                     title="<a:PatPatPat:836341685952184388> \\*PatPat\\*",
                                     description=f"<@!{ctx.author.id}> just delivered you a truckload of heartfelt pats!\n"
                                                 "Cheer up pal, you're a wonderful person!",
-                                    thumbnail="https://cdn.discordapp.com/emojis/889187488915128421.gif")
+                                    thumbnail="https://cdn.discordapp.com/emojis/889187488915128421.gif",
+                                    ephemeral=False)
         else:
             await utils.embed_reply(ctx,
                                     title="<a:PatPatPat:836341685952184388> \\*PatPat\\*",
                                     description=f"<@!{ctx.author.id}> doesn't have any friends yet so they tried consoling themselves with a few pats!\n"
                                                 "Cheer up pal, life gets better!",
-                                    thumbnail="https://cdn.discordapp.com/emojis/889190978001465476.gif")
+                                    thumbnail="https://cdn.discordapp.com/emojis/889190978001465476.gif",
+                                    ephemeral=False)
 
     @utils.hybcommand(globals.bot,
                       name="noisesplugin",
@@ -93,7 +99,8 @@ class Fun(commands.Cog,
                                     ["🔗 Link:",          "[Noises Plugin - GitHub](https://www.youtube.com/watch?v=t0I4mTEdAf8)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaOmega",                                                                                                                                          True],
                                 ],
-                                thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
+                                thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png",
+                                ephemeral=False)
 
 
 async def setup(bot):
