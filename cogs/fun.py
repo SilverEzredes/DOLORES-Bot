@@ -22,14 +22,14 @@ class Fun(commands.Cog,
         if user and user.id != ctx.author.id:
             await utils.embed_reply(ctx,
                                     content=f"<@!{user.id}>",
-                                    title="🍪🌿 Herb!",
+                                    title="🌿 Herb!",
                                     description=f"<@!{ctx.author.id}> just rolled you a G+G+G blunt of the greenest herb🌿!\n"
                                                 "A mixture of 3 Green Herbs. Completely restores health.",
                                     thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png",
                                     ephemeral=False)
         else:
             await utils.embed_reply(ctx,
-                                    title="🍪🌿 Herb!",
+                                    title="🌿 Herb!",
                                     description=f"<@!{ctx.author.id}> found some funny looking plant and decided to smoke it🌿!\n"
                                                 "Herb that restores partial health.",
                                     thumbnail="https://cdn.discordapp.com/emojis/762601822979358751.png",
