@@ -40,6 +40,7 @@ globals.ADMIN_ID                   = int       (os.environ.get("ADMIN_ID")      
 globals.ASSISTANCE_CATEGORY_IDS    = json.loads(os.environ.get("ASSISTANCE_CATEGORY_IDS")    or "[]")
 globals.BLACKLISTED_CHANNELS_IDS   = json.loads(os.environ.get("BLACKLISTED_CHANNELS_IDS")   or "[]")
 globals.BOT_PREFIX                 = str       (os.environ.get("BOT_PREFIX")                 or "a/")
+globals.CLOWN_ROLE_NAME            = str       (os.environ.get("CLOWN_ROLE_NAME")            or "Clown")
 globals.CONTRIB_AMOUNT             = int       (os.environ.get("CONTRIB_AMOUNT")             or 1000)
 globals.CONTRIB_CHANNELS_IDS       = json.loads(os.environ.get("CONTRIB_CHANNELS_IDS")       or "[]")
 globals.CONTRIB_COOLDOWN           = int       (os.environ.get("CONTRIB_COOLDOWN")           or 3600)
@@ -207,19 +208,19 @@ async def main():
 
     # Greet user when they join
     @globals.bot.event
-    async def on_member_join(member):
-        if str(member.guild.id) in globals.JOIN_LOG_CHANNEL_IDS:
-            channel = member.guild.get_channel(globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]["join_channel_id"])
-            await channel.send(content=f"<@!{member.id}>",
-                               embed=utils.custom_embed(member.guild,
+    async def on_member_join(user):
+        if str(user.guild.id) in globals.JOIN_LOG_CHANNEL_IDS:
+            channel = user.guild.get_channel(globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]["join_channel_id"])
+            await channel.send(content={user.mention},
+                               embed=utils.custom_embed(user.guild,
                                                         title="👋 Welcome!",
-                                                        description=f"Welcome <@!{member.id}> to Modding Haven!\n"
+                                                        description=f"Welcome {user.mention} to Modding Haven!\n"
                                                                     "\n" +
-                                                                    (f"Make sure you have read through <#{globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]['rules_channel_id']}>!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]["rules_channel_id"] else "") +
-                                                                    (f"Head to <#{globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]['selfrole_channel_id']}> and react to Master of Unlocking to gain access to the rest of the server!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(member.guild.id)]["selfrole_channel_id"] else "") +
+                                                                    (f"Make sure you have read through <#{globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]['rules_channel_id']}>!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]["rules_channel_id"] else "") +
+                                                                    (f"Head to <#{globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]['selfrole_channel_id']}> and react to Master of Unlocking to gain access to the rest of the server!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]["selfrole_channel_id"] else "") +
                                                                     "\n" +
                                                                     "Enjoy your stay!",
-                                                        thumbnail=member.display_avatar.url))
+                                                        thumbnail=user.display_avatar.url))
 
     # Message handler and callback dispatcher
     @globals.bot.event
@@ -252,7 +253,7 @@ async def main():
                         notif_chan = message.guild.get_channel(notif_chan)
                         await notif_chan.send(embed=utils.custom_embed(message.guild,
                                                                        title="💢 Begone, mod!",
-                                                                       description=f"A mod release post was just **removed** from <#{message.channel.id}>\n"
+                                                                       description=f"A mod release post was just **removed** from {message.channel.mention}\n"
                                                                                    f"**Matching filter**: `{word}`\n"
                                                                                    f"**Incriminating text**: ||{(match_final[:999] + '...') if len(match_final) > 999 else match_final}||"))
                     break
@@ -269,6 +270,8 @@ async def main():
         elif message.content and lowered_content.startswith(globals.BOT_PREFIX.lower()):
             await globals.bot.process_commands(message)
         else:
+            if discord.utils.get(getattr(message.author, "roles", []), name=globals.CLOWN_ROLE_NAME):
+                await message.add_reaction("🤡")
             await xp.process_xp(message)
 
     # Handle deleting requests by staff
