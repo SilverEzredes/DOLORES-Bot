@@ -20,7 +20,7 @@ import os
 # Local imports
 from modules import globals, db, errors, xp
 
-DISABLE_EPHEMERAL_COGS = []
+DISABLE_EPHEMERAL_COGS = ["REtools"]
 
 
 # Get database
