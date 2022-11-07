@@ -485,11 +485,11 @@ class REtools(commands.Cog,
     @utils.hybcommand(globals.bot,
                       name="emvengine",
                       description="",
-                      usage="{prfx}emvengine",
+                      usage="{prfx}emv",
                       help="",
-                      aliases=["emv", "console", "refconsole"],
+                      aliases=["emvengine", "console", "refconsole"],
                       slash_aliases=False)
-    async def emvengine(self, ctx):
+    async def emv(self, ctx):
         desc = "Alpha's REFramework scripts, which include an interactive Lua Console that can access your global script variables, useful for script development.\n Also includes: Gravity Gun, Console, Enhanced Model Viewer and Enemy Spawner."
         await utils.embed_reply(ctx,
                                 title="EMV Engine",
@@ -539,6 +539,23 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail=globals.bot.user.display_avatar.url)
 
+	@utils.hybcommand(globals.bot,
+                      name="list",
+                      description="",
+                      usage="{prfx}list",
+                      help="",
+                      aliases="",
+                      slash_aliases=False)
+    async def list(self, ctx):
+        desc = ".list files for REtool or REE.Unpacker"
+        await utils.embed_reply(ctx,
+                                title="List",
+                                description=desc,
+                                fields=[
+                                    ["🔗 Link:",          "[List - GitHub]( https://github.com/Ekey/REE.PAK.Tool)",                                                                                                                                          True],
+                                    ["💻 Developer", "Ekey",                                                                                                                                          True],
+                                ],
+                                thumbnail="https://cdn.discordapp.com/emojis/1039083967401435136.png")
 
 async def setup(bot):
     await bot.add_cog(REtools(bot))
