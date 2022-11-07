@@ -539,7 +539,7 @@ class REtools(commands.Cog,
                                 ],
                                 thumbnail=globals.bot.user.display_avatar.url)
 
-	@utils.hybcommand(globals.bot,
+    @utils.hybcommand(globals.bot,
                       name="list",
                       description="",
                       usage="{prfx}list",
