@@ -483,11 +483,11 @@ class REtools(commands.Cog,
                                 thumbnail=globals.bot.user.display_avatar.url)
 
     @utils.hybcommand(globals.bot,
-                      name="emvengine",
+                      name="emv",
                       description="",
                       usage="{prfx}emv",
                       help="",
-                      aliases=["emvengine", "console", "refconsole"],
+                      aliases=["console", "refconsole"],
                       slash_aliases=False)
     async def emv(self, ctx):
         desc = "Alpha's REFramework scripts, which include an interactive Lua Console that can access your global script variables, useful for script development.\n Also includes: Gravity Gun, Console, Enhanced Model Viewer and Enemy Spawner."
