@@ -544,7 +544,7 @@ class REtools(commands.Cog,
                       description="",
                       usage="{prfx}list",
                       help="",
-                      aliases=["relist"),
+                      aliases=["relist"],
                       slash_aliases=False)
     async def list(self, ctx):
         desc = ".list files for REtool or REE.Unpacker"
