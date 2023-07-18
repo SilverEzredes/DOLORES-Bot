@@ -177,9 +177,9 @@ async def pil_img_from_link(link):
 
 # Draw text at coords with max width
 def draw_text(draw, font, text, color, position, max_width, alignment="lt"):
-    if font.getsize(text)[0] > max_width:
+    if font.size(text)[0] > max_width:
         cutoff = 1
-        while font.getsize(text[:-cutoff] + "...")[0] > max_width:
+        while font.size(text[:-cutoff] + "...")[0] > max_width:
             cutoff += 1
         draw.text(position, text[:-cutoff] + "...", fill=color, font=font, anchor=alignment)
     else:
