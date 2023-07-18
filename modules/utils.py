@@ -116,29 +116,25 @@ async def restart():
 # Setup persistent image components
 def setup_persistent_components():
     # Fonts
-    globals.font47 = ImageFont.truetype("assets/square.ttf", 47)
-    globals.font35 = ImageFont.truetype("assets/square.ttf", 35)
-    globals.font30 = ImageFont.truetype("assets/square.ttf", 30)
-    globals.font24 = ImageFont.truetype("assets/square.ttf", 24)
-    globals.font20 = ImageFont.truetype("assets/square.ttf", 20)
-    globals.font16 = ImageFont.truetype("assets/square.ttf", 16)
+    globals.font47 = ImageFont.truetype("assets/Spirit.otf", 47)
+    globals.font35 = ImageFont.truetype("assets/Spirit.otf", 35)
+    globals.font30 = ImageFont.truetype("assets/Spirit.otf", 30)
+    globals.font24 = ImageFont.truetype("assets/Spirit.otf", 24)
+    globals.font20 = ImageFont.truetype("assets/Spirit.otf", 20)
+    globals.font16 = ImageFont.truetype("assets/Spirit.otf", 16)
     # Avatars
     globals.default_avatar = Image.open('assets/default_avatar.png').resize((200, 200))
     # Overlays
-    globals.overlays_default    = Image.open('assets/overlays/default.png'   )
-    globals.overlays_staff      = Image.open('assets/overlays/staff.png'     )
-    globals.overlays_admin      = Image.open('assets/overlays/admin.png'     )
-    globals.overlays_default_MH = Image.open('assets/overlays/default_MH.png')
-    globals.overlays_staff_MH   = Image.open('assets/overlays/staff_MH.png'  )
-    globals.overlays_admin_MH   = Image.open('assets/overlays/admin_MH.png'  )
+    globals.overlays_default = Image.open('assets/overlays/default.png')
+    globals.overlays_staff   = Image.open('assets/overlays/staff.png'  )
+    globals.overlays_admin   = Image.open('assets/overlays/admin.png'  )
     # Shards
-    globals.shards_orange = Image.open("assets/shards/orange.png").resize((33, 28,))
-    globals.shards_white  = Image.open("assets/shards/white.png" ).resize((33, 28,))
-    globals.shards_teal   = Image.open("assets/shards/teal.png"  ).resize((33, 28,))
-    globals.shards_red    = Image.open("assets/shards/red.png"   ).resize((33, 28,))
+    globals.shards_orange = Image.open("assets/shards/orange.png").resize((33, 28))
+    globals.shards_white  = Image.open("assets/shards/white.png" ).resize((33, 28))
+    globals.shards_teal   = Image.open("assets/shards/teal.png"  ).resize((33, 28))
     # Bars
     globals.bars = {}
-    for color in ["blue_white", "orange_white", "teal_white", "white_blue", "white_orange", "red_white"]:
+    for color in ["blue_white", "orange_white", "teal_white", "white_blue", "white_orange", "blue_assist", "orange_level", "red_cred"]:
         globals.bars[color] = []
         for i in range(11):
             globals.bars[color].append(Image.open(f"assets/bars/{color}/{i}.png"))
@@ -147,7 +143,7 @@ def setup_persistent_components():
     for xp_type in ["level", "cred", "assistance"]:
         globals.levelups[xp_type] = {}
         globals.levelups[xp_type]["overlay"] = Image.open(f"assets/levelup/{xp_type}.png")
-        globals.levelups[xp_type]["color"] = "#FFFFFF" if xp_type == "level" else "#FFFFFF" if xp_type == "cred" else "#F06B02" if xp_type == "assistance" else ""
+        globals.levelups[xp_type]["color"] = "#9c3103" if xp_type == "level" else "#920705" if xp_type == "cred" else "#01395a" if xp_type == "assistance" else ""
 
 
 # Save bytes array into a readable binary object
@@ -177,9 +173,9 @@ async def pil_img_from_link(link):
 
 # Draw text at coords with max width
 def draw_text(draw, font, text, color, position, max_width, alignment="lt"):
-    if font.size(text)[0] > max_width:
+    if font.getsize(text)[0] > max_width:
         cutoff = 1
-        while font.size(text[:-cutoff] + "...")[0] > max_width:
+        while font.getsize(text[:-cutoff] + "...")[0] > max_width:
             cutoff += 1
         draw.text(position, text[:-cutoff] + "...", fill=color, font=font, anchor=alignment)
     else:
@@ -380,14 +376,14 @@ def custom_embed(guild, *, title="", description="", fields=[], thumbnail=None, 
     if add_timestamp:
         embed_to_send = (discord.Embed(title=title,
                                        description=description,
-                                       color=discord.Color(0xFFA724),
+                                       color=discord.Color(0xFF0000),
                                        timestamp=datetime.datetime.utcnow())
                                        .set_footer(text=guild.name,
                                                    icon_url=getattr(guild.icon, "url", None)))
     else:
         embed_to_send = (discord.Embed(title=title,
                                        description=description,
-                                       color=discord.Color(0xFFA724))
+                                       color=discord.Color(0xFF0000))
                                        .set_footer(text=guild.name,
                                                    icon_url=getattr(guild.icon, "url", None)))
     if image:
