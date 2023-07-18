@@ -38,11 +38,11 @@ class Levelling(commands.Cog,
         assistance_next = math.floor((assistance[2] - assistance[1]) * 100 / assistance[2])
         # Setup image foundation
         if user.id == globals.ADMIN_ID:
-            img = Image.open("assets/backgrounds/staff_bg_MH.png"  )
+            img = Image.open("assets/backgrounds/admin.png"  )
         elif utils.is_staff(user):
-            img = Image.open("assets/backgrounds/staff_bg_MH.png"  )
+            img = Image.open("assets/backgrounds/staff.png"  )
         else:
-            img = Image.open("assets/backgrounds/default_bg_MH.png")
+            img = Image.open("assets/backgrounds/default.png")
         draw = ImageDraw.Draw(img)
         # Draw user avatar
         if str(user.display_avatar.url).startswith("https://cdn.discordapp.com/embed/avatars"):
@@ -50,26 +50,25 @@ class Levelling(commands.Cog,
         else:
             avatar = (await utils.pil_img_from_link(str(user.display_avatar.url))).resize((200, 200,))
         try:
-            img.paste(avatar, (24, 18,), avatar)
+            img.paste(avatar, (30, 18,), avatar)
         except ValueError:
-            img.paste(avatar, (24, 18,))
+            img.paste(avatar, (30, 18,))
         # Apply base overlay
         if user.id == globals.ADMIN_ID:
-            img.paste(globals.overlays_admin_MH,   (0, 0,), globals.overlays_admin_MH  )
+            img.paste(globals.overlays_admin,   (0, 0,), globals.overlays_admin  )
         elif utils.is_staff(user):
-            img.paste(globals.overlays_staff_MH,   (0, 0,), globals.overlays_staff_MH  )
+            img.paste(globals.overlays_staff,   (0, 0,), globals.overlays_staff  )
         else:
-            img.paste(globals.overlays_default_MH, (0, 0,), globals.overlays_default_MH)
+            img.paste(globals.overlays_default, (0, 0,), globals.overlays_default)
         # Draw username
         username = user.name.encode('ascii', 'replace').decode('ascii')  # Remove non-ascii glyphs
-        utils.draw_text(draw, globals.font35, username, "#FFFFFF", (268, 85,), 298)
+        utils.draw_text(draw, globals.font35, username, "#232323", (44, 225,), 190)
         # Draw main level and cred values
+        utils.draw_text    (draw, globals.font47, f"{level[0]}", "#232323", (335, 117,), 999)
         if user.id == globals.ADMIN_ID:
-            utils.draw_text(draw, globals.font47, f"LV:{level[0]}", "#F06B02", (277, 141,), 999)
-            utils.draw_text(draw, globals.font47, f"SC:{cred[0]}",  "#E10000", (434, 141,), 999)
+            utils.draw_text(draw, globals.font47, f"{cred[0]}",  "#232323", (480, 117,), 999)
         else:
-            utils.draw_text(draw, globals.font47, f"LV:{level[0]}", "#F06B02", (277, 141,), 999)
-            utils.draw_text(draw, globals.font47, f"SC:{cred[0]}",  "#E10000", (434, 141,), 999)
+            utils.draw_text(draw, globals.font47, f"{cred[0]}",  "#232323", (480, 117,), 999)
         # Draw trophy shards
         x = 267
         for i in range(utils.get_trophy_amount(user)):
@@ -77,53 +76,53 @@ class Levelling(commands.Cog,
                 img.paste    (globals.shards_white,  (x, 194,), globals.shards_white )
             else:
                 if user.id == globals.ADMIN_ID:
-                    img.paste(globals.shards_red,    (x, 194,), globals.shards_red   )
+                    img.paste(globals.shards_teal,   (x, 194,), globals.shards_teal  )
                 else:
                     img.paste(globals.shards_orange, (x, 194,), globals.shards_orange)
-            x += 32
+            x += 24
         # Draw single level values
         if user.id == globals.ADMIN_ID:
-            utils.draw_text(draw, globals.font16, f"LVL:",            "#FFFFFF", (275, 425,), 999)
-            utils.draw_text(draw, globals.font24, f"{level[0]}",      "#FFFFFF", (308, 423,), 999)
+            # utils.draw_text(draw, globals.font47, "LVL:",             "#9c3103", (500, 325,), 999)
+            utils.draw_text(draw, globals.font47, f"{level[0]}",      "#9c3103", (515, 350,), 999)
         else:
-            utils.draw_text(draw, globals.font16, "LVL:",             "#FFFFFF", (275, 425,), 999)
-            utils.draw_text(draw, globals.font24, f"{level[0]}",      "#FFFFFF", (308, 423,), 999)
-        utils.draw_text    (draw, globals.font16, "LVL:",             "#FFFFFF", (275, 518,), 999)
-        utils.draw_text    (draw, globals.font24, f"{cred[0]}",       "#FFFFFF", (308, 516,), 999)
+            # utils.draw_text(draw, globals.font16, "LVL:",             "#FFFFFF", (275, 425,), 999)
+            utils.draw_text(draw, globals.font47, f"{level[0]}",      "#9c3103", (515, 350,), 999)
+        # utils.draw_text    (draw, globals.font16, "LVL:",             "#FFFFFF", (275, 518,), 999)
+        utils.draw_text    (draw, globals.font47, f"{cred[0]}",       "#920705", (515, 510,), 999)
         if user.id == globals.ADMIN_ID:
-            utils.draw_text(draw, globals.font16, f"LVL:",            "#F06B02", (275, 619,), 999)
-            utils.draw_text(draw, globals.font24, f"{assistance[0]}", "#F06B02", (308, 617,), 999)
+            # utils.draw_text(draw, globals.font16, "LVL:",             "#009EDF", (275, 619,), 999)
+            utils.draw_text(draw, globals.font47, f"{assistance[0]}", "#01395a", (515, 660,), 999)
         else:
-            utils.draw_text(draw, globals.font16, "LVL:",             "#F06B02", (275, 619,), 999)
-            utils.draw_text(draw, globals.font24, f"{assistance[0]}", "#F06B02", (308, 617,), 999)
+            # utils.draw_text(draw, globals.font16, "LVL:",             "#F06B02", (275, 619,), 999)
+            utils.draw_text(draw, globals.font47, f"{assistance[0]}", "#01395a", (515, 660,), 999)
         # Draw single percentage values
         if level_next >= 100:
-            utils.draw_text(draw, globals.font30, "MAX",                "#090D18", (579-globals.font30.getsize("MAX")[0],                398,), 999)
+            utils.draw_text(draw, globals.font47, "MAX",                "#232323", (535-globals.font47.getsize("MAX")[0],                440,), 999)
         else:
-            utils.draw_text(draw, globals.font30, f"{level_next}",      "#090D18", (565-globals.font30.getsize(f"{level_next}")[0],      398,), 999)
-            utils.draw_text(draw, globals.font20, "%",                  "#090D18", (565,                                                 407,), 999)
+            utils.draw_text(draw, globals.font47, f"{level_next}",      "#232323", (535-globals.font47.getsize(f"{level_next}")[0],      440,), 999)
+            utils.draw_text(draw, globals.font47, "%",                  "#232323", (540,                                                 445,), 999)
         if cred_next >= 100:
-            utils.draw_text(draw, globals.font30, "MAX",                "#090D18", (579-globals.font30.getsize("MAX")[0],                491,), 999)
+            utils.draw_text(draw, globals.font47, "MAX",                "#232323", (555-globals.font47.getsize("MAX")[0],                590,), 999)
         else:
-            utils.draw_text(draw, globals.font30, f"{cred_next}",       "#090D18", (565-globals.font30.getsize(f"{cred_next}")[0],       491,), 999)
-            utils.draw_text(draw, globals.font20, "%",                  "#090D18", (565,                                                 500,), 999)
+            utils.draw_text(draw, globals.font47, f"{cred_next}",       "#232323", (555-globals.font47.getsize(f"{cred_next}")[0],       590,), 999)
+            utils.draw_text(draw, globals.font47, "%",                  "#232323", (560,                                                 595,), 999)
         if assistance_next >= 100:
-            utils.draw_text(draw, globals.font30, "MAX",                "#090D18", (579-globals.font30.getsize("MAX")[0],                593,), 999)
+            utils.draw_text(draw, globals.font47, "MAX",                "#232323", (70-globals.font47.getsize("MAX")[0],                732,), 999)
         else:
-            utils.draw_text(draw, globals.font30, f"{assistance_next}", "#090D18", (565-globals.font30.getsize(f"{assistance_next}")[0], 593,), 999)
-            utils.draw_text(draw, globals.font20, "%",                  "#090D18", (565,                                                 602,), 999)
+            utils.draw_text(draw, globals.font47, f"{assistance_next}", "#232323", (70-globals.font47.getsize(f"{assistance_next}")[0], 732,), 999)
+            utils.draw_text(draw, globals.font47, "%",                  "#232323", (75,                                                 737,), 999)
         # Overlay percentage bars
         if user.id == globals.ADMIN_ID:
-            level_bar      = globals.bars["orange_white"][utils.get_bar_index_from_lvl_percent(level_next     )]
-            cred_bar       = globals.bars[ "red_white"  ][utils.get_bar_index_from_lvl_percent(cred_next      )]
-            assistance_bar = globals.bars["white_orange"][utils.get_bar_index_from_lvl_percent(assistance_next)]
+            level_bar      = globals.bars[ "orange_level" ][utils.get_bar_index_from_lvl_percent(level_next     )]
+            cred_bar       = globals.bars[ "red_cred" ][utils.get_bar_index_from_lvl_percent(cred_next      )]
+            assistance_bar = globals.bars[ "blue_assist" ][utils.get_bar_index_from_lvl_percent(assistance_next)]
         else:
-            level_bar      = globals.bars["orange_white"][utils.get_bar_index_from_lvl_percent(level_next     )]
-            cred_bar       = globals.bars[ "red_white"  ][utils.get_bar_index_from_lvl_percent(cred_next      )]
-            assistance_bar = globals.bars["white_orange"][utils.get_bar_index_from_lvl_percent(assistance_next)]
-        img.paste(level_bar,      (218, 457,), level_bar     )
-        img.paste(cred_bar,       (218, 550,), cred_bar      )
-        img.paste(assistance_bar, (218, 650,), assistance_bar)
+            level_bar      = globals.bars[ "orange_level" ][utils.get_bar_index_from_lvl_percent(level_next     )]
+            cred_bar       = globals.bars["red_cred"][utils.get_bar_index_from_lvl_percent(cred_next      )]
+            assistance_bar = globals.bars["blue_assist"][utils.get_bar_index_from_lvl_percent(assistance_next)]
+        img.paste(level_bar,      (35, 380,), level_bar     )
+        img.paste(cred_bar,       (35, 540,), cred_bar      )
+        img.paste(assistance_bar, (35, 690,), assistance_bar)
         # Send the image
         binary = io.BytesIO()
         img.save(binary, format="PNG")
