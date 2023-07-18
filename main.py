@@ -67,7 +67,7 @@ globals.REP_ICON                   = str       (os.environ.get("REP_ICON")      
 globals.REQUESTS_CHANNEL_IDS       = json.loads(os.environ.get("REQUESTS_CHANNEL_IDS")       or "{}")
 globals.REQUESTS_COOLDOWN          = int       (os.environ.get("REQUESTS_COOLDOWN")          or 600)
 globals.REQUESTS_ICONS             = json.loads(os.environ.get("REQUESTS_ICONS")             or '{"Waiting": "https://cdn.discordapp.com/emojis/889210410899746897.png", "WIP": "https://cdn.discordapp.com/emojis/889210383523536896.png", "Released": "https://cdn.discordapp.com/emojis/889210365362184272.png", "Already Exists": "https://cdn.discordapp.com/emojis/889210365362184272.png"}')
-globals.STAFF_ROLE_IDS             = json.loads(os.environ.get("STAFF_ROLE_IDS")             or "customize-community")
+globals.STAFF_ROLE_IDS             = json.loads(os.environ.get("STAFF_ROLE_IDS")             or "[]")
 globals.TROPHY_ROLES               = json.loads(os.environ.get("TROPHY_ROLES")               or "[]")
 globals.WRITE_AS_PASS              = str       (os.environ.get("WRITE_AS_PASS")              or "")
 globals.WRITE_AS_POST_ID           = str       (os.environ.get("WRITE_AS_POST_ID")           or "")
@@ -218,7 +218,7 @@ async def main():
                                                         description=f"Welcome {user.mention} to Modding Haven!\n"
                                                                     "\n" +
                                                                     (f"Make sure you have read through <#{globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]['rules_channel_id']}>!\n" if globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]["rules_channel_id"] else "") +
-                                                                    (f"You can pick your poison and name color in <#{globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]['selfrole_channel_id']}>\n" if globals.JOIN_LOG_CHANNEL_IDS[str(user.guild.id)]["selfrole_channel_id"] else "") +
+                                                                    "You can pick your poison and name color in the Channels & Roles tab" +
                                                                     "\n" +
                                                                     "Enjoy your stay!",
                                                         thumbnail=user.display_avatar.url))
