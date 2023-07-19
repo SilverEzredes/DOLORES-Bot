@@ -94,17 +94,17 @@ class Levelling(commands.Cog,
         if level_next >= 100:
             utils.draw_text(draw, globals.font47, "MAX",                    "#232323", (535, 440,), 999)
         else:
-            utils.draw_text(draw, globals.font47, f"{level_next[0]}",       "#232323", (535, 440,), 999)
+            utils.draw_text(draw, globals.font47, f"{level_next}",          "#232323", (535, 440,), 999)
             utils.draw_text(draw, globals.font47, "%",                      "#232323", (540, 445,), 999)
         if cred_next >= 100:
             utils.draw_text(draw, globals.font47, "MAX",                    "#232323", (555, 590,), 999)
         else:
-            utils.draw_text(draw, globals.font47, f"{cred_next[0]}",        "#232323", (555, 590,), 999)
+            utils.draw_text(draw, globals.font47, f"{cred_next}",        "#232323", (555, 590,), 999)
             utils.draw_text(draw, globals.font47, "%",                      "#232323", (560, 595,), 999)
         if assistance_next >= 100:
             utils.draw_text(draw, globals.font47, "MAX",                    "#232323", (70, 732,), 999)
         else:
-            utils.draw_text(draw, globals.font47, f"{assistance_next[0]}",  "#232323", (70, 732,), 999)
+            utils.draw_text(draw, globals.font47, f"{assistance_next}",  "#232323", (70, 732,), 999)
             utils.draw_text(draw, globals.font47, "%",                      "#232323", (75, 737,), 999)
         # Overlay percentage bars
         if user.id == globals.ADMIN_ID:
