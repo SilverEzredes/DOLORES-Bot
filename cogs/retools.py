@@ -59,7 +59,7 @@ class REtools(commands.Cog,
                                 title="REtool",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[REtool](https://residentevilmodding.boards.net/thread/10567/pak-tex-editing-tool)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[REtool](www.fluffyquack.com/tools/REtool.rar)",                                                                                                                                          True],
                                     ["💻 Developer", "FluffyQuack",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994126946680176751.png")
@@ -97,7 +97,7 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[RE RSZ - GitHub](https://github.com/alphazolam/RE_RSZ)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[RE RSZ - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932644761028939816)",                                                                                                                                           True]
+                                    ["📖 More Info:",       "[RE RSZ - Thread](https://discord.com/channels/718224210270617702/1100168234440867952)",                                                                                                                                           True]
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
@@ -114,7 +114,7 @@ class REtools(commands.Cog,
                                 title="3DSmax MESH Script - RE-ENGINE MESH TOOL",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[3DSmax MESH - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932645540599046204)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[3DSmax MESH - Thread](https://discord.com/channels/718224210270617702/1100180421158899743)",                                                                                                                                          True],
                                     ["💻 Developers", "Maliwei777, alphaZomega, MarioKart64n, Shigu and others",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
@@ -132,7 +132,7 @@ class REtools(commands.Cog,
                                 title="alphaZomega Tool",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[alphaZomega Tool - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932645657364287519)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[alphaZomega Tool - Thread](https://discord.com/channels/718224210270617702/1100172423023833138)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
@@ -150,7 +150,7 @@ class REtools(commands.Cog,
                                 title="ResetMesh",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[ResetMesh - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932645788826353705)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[ResetMesh - Thread](https://discord.com/channels/718224210270617702/1100180230276120596)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
@@ -170,7 +170,7 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[Alpha's Offset Fixer - GitHub](https://github.com/alphazolam/Alpha-Offset-Fixer)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[Offset Fixer - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932646362795868240)",                                                                                                                                           True],
+                                    ["📖 More Info:",       "[Offset Fixer - Thread](https://discord.com/channels/718224210270617702/1100172041623187506)",                                                                                                                                           True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
@@ -187,7 +187,7 @@ class REtools(commands.Cog,
                                 title="Motlist Tool",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Motlist Tool - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932646688370331768)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Motlist Tool - Thread](https://discord.com/channels/718224210270617702/1100181692221763584)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
@@ -205,7 +205,7 @@ class REtools(commands.Cog,
                                 title="Motlist Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Motlist Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932647093208760330)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Motlist Template - Thread](https://discord.com/channels/718224210270617702/1100180883090178078)",                                                                                                                                          True],
                                     ["💻 Developers", "alphaZomega, che, Jackal",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -223,7 +223,7 @@ class REtools(commands.Cog,
                                 title="Motbank Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Motbank Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932647199974752256)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Motbank Template - Thread](https://discord.com/channels/718224210270617702/1100178643302482031)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -241,7 +241,7 @@ class REtools(commands.Cog,
                                 title="Mesh Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Mesh Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932647646244507679)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Mesh Template - Thread](https://discord.com/channels/718224210270617702/1100179706336268328)",                                                                                                                                          True],
                                     ["💻 Developers", "che, alphaZomega, Darkness",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -259,7 +259,7 @@ class REtools(commands.Cog,
                                 title="MDF Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[MDF Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648376221171832)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[MDF Template - Thread](https://discord.com/channels/718224210270617702/1100179219306258492)",                                                                                                                                          True],
                                     ["💻 Developers", "che, alphaZomega, Darkness",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -277,7 +277,7 @@ class REtools(commands.Cog,
                                 title="Chain Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Chain Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648576398540860)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Chain Template - Thread](https://discord.com/channels/718224210270617702/1100176279073996910)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -295,7 +295,7 @@ class REtools(commands.Cog,
                                 title="GPUC Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[GPUC Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648669956681739)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[GPUC Template - Thread](https://discord.com/channels/718224210270617702/1100173214900048004)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -313,7 +313,7 @@ class REtools(commands.Cog,
                                 title="CLIP-TML Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[CLIP-TML Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648812596588594)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[CLIP-TML Template - Thread](https://discord.com/channels/718224210270617702/1100173476104511568)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -331,7 +331,7 @@ class REtools(commands.Cog,
                                 title="GUI Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[GUI Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648939541389352)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[GUI Template - Thread](https://discord.com/channels/718224210270617702/1100174150410178662)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -349,7 +349,7 @@ class REtools(commands.Cog,
                                 title="FBXskel Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[FBXskel Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932649195674935336)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[FBXskel Template - Thread](https://discord.com/channels/718224210270617702/1100178076647837797)",                                                                                                                                          True],
                                     ["💻 Developers", "che, alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -367,7 +367,7 @@ class REtools(commands.Cog,
                                 title="TEX Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[TEX Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932649305536364635)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[TEX Template - Thread](https://discord.com/channels/718224210270617702/1100183316604403863)",                                                                                                                                          True],
                                     ["💻 Developers", "che, alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -385,7 +385,7 @@ class REtools(commands.Cog,
                                 title="EFX Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[EFX Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932649426328125500)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[EFX Template - Thread](https://discord.com/channels/718224210270617702/1099994039127904287)",                                                                                                                                          True],
                                     ["💻 Developer", "Darkness",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -403,7 +403,7 @@ class REtools(commands.Cog,
                                 title="UVAR Template",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[UVAR Template - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932650247312769094)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[UVAR Template - Thread](https://discord.com/channels/718224210270617702/1100177624065658880)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
@@ -423,7 +423,7 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[MDF Manager - GitHub](https://github.com/Silvris/MDF-Manager)",                                                                                                                                          True],
                                     ["💻 Developer", "Silvris",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[MDF Manager - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648163251191819)",                                                                                                                                           True],
+                                    ["📖 More Info:",       "[MDF Manager - Thread](https://discord.com/channels/718224210270617702/1099975922163126272)",                                                                                                                                           True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
@@ -442,7 +442,6 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[Ringing Bloom - GitHub](https://github.com/Silvris/RingingBloom)",                                                                                                                                          True],
                                     ["💻 Developer", "Silvris",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[Ringing Bloom - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932648013300654131)",                                                                                                                                           True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994146859327172689.png")
 
@@ -459,7 +458,7 @@ class REtools(commands.Cog,
                                 title="Fbxskel Tool",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[Fbxskel Tool - Thread](https://discord.com/channels/718224210270617702/930092288330309683/932649107091247195)",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[Fbxskel Tool - Thread](https://discord.com/channels/718224210270617702/1100175459704123503)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994125244212199424.png")
@@ -477,8 +476,8 @@ class REtools(commands.Cog,
                                 title="MSG Tool",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[MSG Tool - Thread](https://discord.com/channels/718224210270617702/930092288330309683/940772924531552257)",                                                                                                                                          True],
-                                    ["💻 Developer", "ponaromixxx",                                                                                                                                          True],
+                                    ["🔗 Link:",          "[MSG Tool - Thread](https://discord.com/channels/718224210270617702/1100030327210123354)",                                                                                                                                          True],
+                                    ["💻 Developer", "dtlnor",                                                                                                                                          True],
                                 ],
                                 thumbnail=globals.bot.user.display_avatar.url)
 
@@ -497,7 +496,7 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[EMV Engine - GitHub](https://github.com/alphazolam/REFramework-Scripts)",                                                                                                                                          True],
                                     ["💻 Developer", "alphaZomega",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[EMV Engine - Thread](https://discord.com/channels/718224210270617702/930092288330309683/993612146413928448)",                                                                                                                                           True],
+                                    ["📖 More Info:",       "[EMV Engine - Thread](https://discord.com/channels/718224210270617702/1100184756571865158)",                                                                                                                                           True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994124668690767912.png")
 
@@ -516,7 +515,7 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[Blender Wrapper - GitHub](https://github.com/NSACloud/Blender-RE-Mesh-Noesis-Wrapper)",                                                                                                                                          True],
                                     ["💻 Developer", "NSA Cloud",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[Blender Wrapper - Thread](https://discord.com/channels/718224210270617702/930092288330309683/993614546054938686)",                                                                                                                                           True],
+                                    ["📖 More Info:",       "[Blender Wrapper - Thread](https://discord.com/channels/718224210270617702/1099992474539282442)",                                                                                                                                           True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/994151478065373225.png")
 
@@ -535,7 +534,6 @@ class REtools(commands.Cog,
                                 fields=[
                                     ["🔗 Link:",          "[RELit - GitHub]( https://github.com/originalnicodr/RELit)",                                                                                                                                          True],
                                     ["💻 Developer", "originalnicodr, Otis_inf",                                                                                                                                          True],
-                                    ["📖 More Info:",       "[RELit - Thread](https://discord.com/channels/718224210270617702/930092288330309683/993615154845581323)",                                                                                                                                           True],
                                 ],
                                 thumbnail=globals.bot.user.display_avatar.url)
 
