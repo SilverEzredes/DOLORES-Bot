@@ -114,14 +114,14 @@ async def notify_level_up(message, xp_type, old_lvl, new_lvl):
         else:
             avatar = (await utils.pil_img_from_link(str(message.author.display_avatar.url))).resize((84, 84,))
         try:
-            img.paste(avatar, (5, 5,), avatar)
+            img.paste(avatar, (27, 5,), avatar)
         except ValueError:
-            img.paste(avatar, (5, 5,))
+            img.paste(avatar, (27, 5,))
         # Apply base overlay
         img.paste(globals.levelups[xp_type]["overlay"], (0, 0,), globals.levelups[xp_type]["overlay"])
         # Draw old and new level values
-        utils.draw_text(draw, globals.font47, f"{old_lvl}", globals.levelups[xp_type]["color"], (344, 56,), 999)
-        utils.draw_text(draw, globals.font47, f"{new_lvl}", globals.levelups[xp_type]["color"], (530, 56,), 999)
+        utils.draw_text(draw, globals.font47, f"{old_lvl}", globals.levelups[xp_type]["color"], (420, 60,), 999)
+        utils.draw_text(draw, globals.font47, f"{new_lvl}", globals.levelups[xp_type]["color"], (540, 60,), 999)
         # Send image
         binary = io.BytesIO()
         img.save(binary, format="PNG")
