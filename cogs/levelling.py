@@ -83,6 +83,7 @@ class Levelling(commands.Cog,
         # Draw single level values
         if user.id == globals.ADMIN_ID:
             utils.draw_text(draw, globals.font47, f"{level[0]}",      "#9c3103", (515, 350,), 999)
+            utils.draw_text(draw, globals.font47, f"{cred[0]}",       "#920705", (515, 510,), 999)
         else:
             utils.draw_text(draw, globals.font47, f"{level[0]}",      "#9c3103", (515, 350,), 999)
             utils.draw_text(draw, globals.font47, f"{cred[0]}",       "#920705", (515, 510,), 999)
