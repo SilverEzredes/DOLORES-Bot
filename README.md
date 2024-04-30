@@ -15,9 +15,5 @@ Custom Discord bot for Modding Haven.
  - Level up notification
  - Join message
 
-## To Do:
- - Moderation Tools
- - IDK
-
 ## Credits:
 WillyJL#3633 for his amazing coding skills.
