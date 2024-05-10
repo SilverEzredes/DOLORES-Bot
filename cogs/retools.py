@@ -568,7 +568,7 @@ class REtools(commands.Cog,
                                 title="RE Engine Templates",
                                 description=desc,
                                 fields=[
-                                    ["🔗 Link:",          "[List - GitHub](https://github.com/alphazolam/RE-Engine-010-Templates)",                                                                                                                                          True],],
+                                    ["🔗 Link:",          "[GitHub](https://github.com/alphazolam/RE-Engine-010-Templates)",                                                                                                                                          True],],
                                 thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
 async def setup(bot):
