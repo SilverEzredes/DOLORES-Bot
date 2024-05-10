@@ -560,7 +560,7 @@ class REtools(commands.Cog,
                 description="",
                 usage="{prfx}templates",
                 help="",
-                aliases=["templates", "template master"],
+                aliases=["template master"],
                 slash_aliases=False)
     async def templates(self, ctx):
         desc = "This is a repository of 010 Editor templates for parsing RE Engine game formats."
