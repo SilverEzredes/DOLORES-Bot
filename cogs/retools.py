@@ -554,6 +554,22 @@ class REtools(commands.Cog,
                                     ["💻 Developer", "Ekey",                                                                                                                                          True],
                                 ],
                                 thumbnail="https://cdn.discordapp.com/emojis/1039083967401435136.png")
+        
+    @utils.hybcommand(globals.bot,
+                name="templates",
+                description="",
+                usage="{prfx}templates",
+                help="",
+                aliases=["templates", "template master"],
+                slash_aliases=False)
+    async def templates(self, ctx):
+        desc = "This is a repository of 010 Editor templates for parsing RE Engine game formats."
+        await utils.embed_reply(ctx,
+                                title="RE Engine Templates",
+                                description=desc,
+                                fields=[
+                                    ["🔗 Link:",          "[List - GitHub](https://github.com/alphazolam/RE-Engine-010-Templates)",                                                                                                                                          True],],
+                                thumbnail="https://cdn.discordapp.com/emojis/955607176674697276.png")
 
 async def setup(bot):
     await bot.add_cog(REtools(bot))
