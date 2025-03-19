@@ -105,7 +105,7 @@ async def main():
     globals.bot = commands.Bot(
         command_prefix=utils.case_insensitive(globals.BOT_PREFIX),
         case_insensitive=True,
-        description="Custom Discord bot for the Modding Haven Server",
+        description="Custom Discord bot for the Haven's Night Server",
         intents=discord.Intents.default() | discord.Intents(discord.Intents.message_content.flag) | discord.Intents(discord.Intents.members.flag) | discord.Intents(discord.Intents.presences.flag),
         allowed_mentions=discord.AllowedMentions(everyone=False, roles=False) # Avoid unwanted chaos
     )
@@ -219,7 +219,7 @@ async def main():
             await channel.send(content=user.mention,
                                embed=utils.custom_embed(user.guild,
                                                         title="👋 Welcome!",
-                                                        description=f"Welcome {user.mention} to Modding Haven!\n"
+                                                        description=f"Welcome {user.mention} to Haven's Night!\n"
                                                                     "\n" +
                                                                     (f"Make sure you have read through {rules_channel}!\n" if rules_channel_id else "") +
                                                                     (f"You can pick your poisons in {selfrole_channel}!\n" if selfrole_channel_id else "") +
