@@ -222,7 +222,7 @@ async def main():
                                                         description=f"Welcome {user.mention} to Haven's Night!\n"
                                                                     "\n" +
                                                                     (f"Make sure you have read through {rules_channel}!\n" if rules_channel_id else "") +
-                                                                    (f"You can pick your poisons in {selfrole_channel}!\n" if selfrole_channel_id else "") +
+                                                                    (f"You can pick your poison and name color in the {selfrole_channel}!\n" if selfrole_channel_id else "") +
                                                                     "\n" +
                                                                     "Enjoy your stay!",
                                                         thumbnail=user.display_avatar.url))
