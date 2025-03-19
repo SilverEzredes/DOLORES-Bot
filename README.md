@@ -1,5 +1,5 @@
 # D.O.L.O.R.E.S. Bot
-Custom Discord bot for Modding Haven.
+Custom Discord bot for Haven's Night.
 
 ## Features:
  - Leveling system for:
